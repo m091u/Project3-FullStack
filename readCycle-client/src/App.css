@@ -1,0 +1,158 @@
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+.homeContainer {
+  min-height: 80vh;
+}
+
+/* CSS for the Signup/Login Component */
+.SignupOuter,
+.LoginOuter {
+  background-image: url(./assets/bookshelf2.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 95vh;
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  padding: 0;
+}
+
+.Login,
+.Signup {
+  width: 100%;
+  max-width: 400px;
+  min-height: 500px;
+  margin: auto;
+  background-color: aliceblue;
+  border-radius: 10px;
+  color: rgb(102, 138, 138);
+}
+
+.LoginInner {
+  margin: 50px 0 0 50px;
+}
+
+.SignupInner {
+  margin: 30px 0 0 50px;
+}
+
+input {
+  padding: 10px;
+  margin: 20px 0;
+  border: 0;
+  box-shadow: 0 0 15px 4px rgba(170, 163, 163, 0.6);
+  border-radius: 10px;
+  width: 80%;
+}
+
+input[type="email"]{
+  background: url(./assets/icons8-email-24.png) no-repeat 7px 8px;
+  background-size: 20px 20px;
+  padding-left: 35px;
+}
+
+input[type="password"] {
+  background: url(./assets/icons8-password-24.png) no-repeat 7px 8px;
+  background-size: 20px 20px;
+  padding-left: 35px;
+}
+
+.SignupInner input[type="text"], 
+.LoginInner input[type="text"] {
+  background: url(./assets/icons8-name-24.png) no-repeat 7px 8px;
+  background-size: 20px 20px;
+  padding-left: 35px;
+}
+
+#genre{
+  padding: 10px;
+  margin: 20px 0;
+  border: 0;
+  box-shadow: 0 0 15px 4px rgba(170, 163, 163, 0.6);
+  border-radius: 10px;
+  width: 80%; 
+}
+
+textarea {
+  width:80%;
+  resize: vertical;
+  padding:15px;
+  border-radius:15px;
+  border:0;
+  box-shadow:4px 4px 10px rgba(0,0,0,0.06);
+  height:80px;
+}
+
+.Signup button,
+.Login button,
+.AddBookPage button {
+  padding: 10px;
+  border: none;
+  background-color: #5db1a2;
+  color: aliceblue;
+  font-weight: 600;
+  border-radius: 5px;
+  width: 80%;
+  margin-top: 10px;
+}
+
+.AddBookPage{
+  background-image: url(./assets/page-turner.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 95vh;
+}
+
+.BookDetails{
+  margin-top:20px
+}
+
+.LibraryPage{
+  margin: 10px 20px 90px 20px;
+  
+}
+
+
+.booksContainer{
+  display: inline;
+}
+
+/* CSS for the Footer Component */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #001055;
+  color: aliceblue;
+  padding: 20px 20px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  margin:0;
+}
+
+.social-links {
+  display: flex;
+  gap: 20px;
+}
+
+.social-links a {
+  text-decoration: none;
+  color: aliceblue;
+  font-size: 24px;
+}
+
+.copyright {
+  order: -1; 
+}
