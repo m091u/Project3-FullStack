@@ -1,17 +1,16 @@
 const express = require("express");
-const router = require("express").Router();
+const router = express.Router();
 const mongoose = require("mongoose");
 
 const Book = require("../models/Book.model");
 
-const {isAuthenticated} = require("../middleware/jwt.middleware");
-
 //POST/api/books - create new book
-router.post("/library", isAuthenticated, (req, res) => {
+router.post("/library", (req, res) => {
   const { title, author, genre, description, language, coverImage, review } =
     req.body;
 
-    const offeredBy = req.payload.id; 
+  // Extract user ID from the decoded JWT token
+  const userId = req.payload._id;
 
   Book.create({
     title,
@@ -21,15 +20,25 @@ router.post("/library", isAuthenticated, (req, res) => {
     language,
     coverImage,
     review,
-    offeredBy,
+    offeredBy: userId,
+    takenBy: null,
+    isDelivered: false,
+    booked: false,
   })
-    .then((response) => res.json(response))
-    .catch((err) => res.json(err));
+    .then((response) => {
+      console.log(response);
+      res.json(response);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.json(err);
+    });
 });
 
 //  GET /api/books -  Retrieves all of the books
 router.get("/library", (req, res, next) => {
   Book.find()
+    .populate("offeredBy")
     .then((allBooks) => res.json(allBooks))
     .catch((err) => res.json(err));
 });
@@ -44,9 +53,20 @@ router.get("/library/:bookId", (req, res, next) => {
   }
 
   Book.findById(bookId)
-    .then((book) => res.status(200).json(book))
+    .populate("offeredBy")
+    .then((book) => {
+      if (!book) {
+        res.status(404).json({ message: "Book not found" });
+        return;
+      }
+
+      // Log the book data here
+      console.log("Book Data:", book);
+
+      // Send the book data as a response
+      res.status(200).json(book);
+    })
     .catch((error) => res.json(error));
 });
-
 
 module.exports = router;

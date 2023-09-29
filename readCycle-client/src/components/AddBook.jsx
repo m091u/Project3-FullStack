@@ -4,6 +4,7 @@ import axios from "axios";
 const API_URL = "http://localhost:4005";
 
 function AddBook(props) {
+
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [genre, setGenre] = useState("");
@@ -15,7 +16,7 @@ function AddBook(props) {
   // State variables for error messages
   const [titleError, setTitleError] = useState("");
   const [authorError, setAuthorError] = useState("");
-  const [genreError, setgenreError] = useState("");
+  const [genreError, setGenreError] = useState("");
   const [coverImageError, setCoverImageError] = useState("");
 
   const handleSubmit = (e) => {
@@ -25,8 +26,8 @@ function AddBook(props) {
     if (!title || !author || !genre || !coverImage) {
       if (!title) setTitleError("Title is mandatory.");
       if (!author) setAuthorError("Author is mandatory.");
-      if (!genre) setAuthorError("Genre is mandatory.");
-      if (!coverImage) setAuthorError("Cover image url is mandatory.");
+      if (!genre) setGenreError("Genre is mandatory.");
+      if (!coverImage) setCoverImageError("Cover image url is mandatory.");
       return; // Don't proceed if mandatory fields are empty
     }
 
@@ -63,14 +64,14 @@ function AddBook(props) {
 
   return (
     <div className="AddBookPage">
-      <h3 >Add your Dog-Eared Book</h3>
+      <h3 className="addBookTitle">Add your Dog-Eared Book</h3>
 
       <form onSubmit={handleSubmit}>
         <label></label>
         <input
           type="text"
           name="title"
-          placeholder="Book Title"
+          placeholder="Book Title * "
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
@@ -80,21 +81,32 @@ function AddBook(props) {
         <input
           type="text"
           name="author"
-          placeholder="Author"
+          placeholder="Author *"
           value={author}
           onChange={(e) => setAuthor(e.target.value)}
         />
         <p className="error-message">{authorError}</p>
+
+        <label></label>
+        <input
+          type="text"
+          name="coverImage"
+          placeholder="Cover Image url *"
+          value={coverImage}
+          onChange={(e) => setCoverImage(e.target.value)}
+        />
+        <p className="error-message">{coverImageError}</p>
 
         <label htmlFor="genre"></label>
         <select
           id="genre"
           type="text"
           name="genre"
+          placeholder="Genre *"
           value={genre}
           onChange={(e) => setGenre(e.target.value)}
         >
-          <option value="">Select Genre</option>
+          <option value="">Select Genre *</option>
           <option value="Fiction">Fiction</option>
           <option value="Non-Fiction">Non-Fiction</option>
           <option value="Mystery">Mystery</option>
@@ -116,15 +128,6 @@ function AddBook(props) {
         <p className="error-message">{genreError}</p>
 
         <label></label>
-        <textarea
-          type="text"
-          name="description"
-          placeholder="Description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
-
-        <label></label>
         <input
           type="text"
           name="language"
@@ -134,15 +137,13 @@ function AddBook(props) {
         />
 
         <label></label>
-        <input
+        <textarea
           type="text"
-          name="coverImage"
-          placeholder="Cover Image url"
-          value={coverImage}
-          onChange={(e) => setCoverImage(e.target.value)}
+          name="description"
+          placeholder="Description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
         />
-         <p className="error-message">{coverImageError}</p>
-
 
         <label></label>
         <textarea

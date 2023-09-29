@@ -42,6 +42,7 @@ const bookSchema = new Schema({
   offeredBy: {
     type: Schema.Types.ObjectId,
     ref: "User",
+    required: true,
   },
   takenBy: {
     type: Schema.Types.ObjectId,

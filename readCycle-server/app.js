@@ -21,9 +21,12 @@ const indexRoutes = require("./routes/index.routes");
 app.use("/api", indexRoutes);
 
 const libraryRouter = require("./routes/library.routes");
-app.use("/api",isAuthenticated, libraryRouter);
+app.use("/api", isAuthenticated, libraryRouter);
 
-const authRouter = require("./routes/auth.routes"); //  <== IMPORT
+const userRoutes = require("./routes/user.routes");
+app.use("/api", userRoutes);
+
+const authRouter = require("./routes/auth.routes");
 app.use("/auth", authRouter);
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes

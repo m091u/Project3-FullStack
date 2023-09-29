@@ -13,7 +13,7 @@ function Navbar() {
   //  depending on whether the user is logged in or not
 
   return (
-    <nav>
+    <nav className="nav">
       <Link to="/">
         <button>readCycle📚</button>
       </Link>

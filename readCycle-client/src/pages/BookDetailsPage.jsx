@@ -3,13 +3,16 @@ import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
+
 const API_URL = "http://localhost:4005";
 
 function BookDetailsPage(props) {
   const { user } = useContext(AuthContext);
   const [book, setBook] = useState(null);
   const { bookId } = useParams();
-  console.log(user);
+
+  // console.log(user);
+
   const getBook = () => {
     // Get the token from the localStorage
     const storedToken = localStorage.getItem("authToken");
@@ -22,6 +25,7 @@ function BookDetailsPage(props) {
       })
       .then((response) => {
         const oneBook = response.data;
+        console.log("Book Data from Server:", oneBook);
         setBook(oneBook);
       })
       .catch((error) => console.log(error));
@@ -52,7 +56,8 @@ function BookDetailsPage(props) {
             <strong>Owner review: </strong> {book.review}
           </p>
           <p>
-            <strong>Owner: </strong> {user.name}
+            <strong>Owner: </strong>
+            <a href={`/profile/`}>{book.offeredBy.name}</a>
           </p>
         </>
       )}

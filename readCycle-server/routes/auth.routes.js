@@ -1,19 +1,10 @@
-// routes/auth.routes.js
-
 const express = require("express");
+const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User.model");
 
-const router = express.Router();
-
-router.get("/signup", (req, res) => {
-  res.json({ message: "Route should work!" });
-});
-
-// ... all imports stay unchanged
-const { isAuthenticated } = require("./../middleware/jwt.middleware.js"); // <== IMPORT
-
+const {isAuthenticated} = require("../middleware/jwt.middleware"); // <== IMPORT
 const saltRounds = 10;
 
 // POST /auth/signup  - Creates a new user in the database

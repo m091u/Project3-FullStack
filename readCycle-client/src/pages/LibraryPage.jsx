@@ -2,13 +2,16 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-import AddBook from "../components/AddBook";
+import { useContext } from "react";
+import { AuthContext } from "../context/auth.context";
+
 import BookCard from "../components/BookCard";
 
 const API_URL = "http://localhost:4005";
 
 function LibraryPage() {
   const [books, setBooks] = useState([]);
+  const { user } = useContext(AuthContext);
 
   const getAllBooks = () => {
     // Get the token from the localStorage
@@ -20,12 +23,22 @@ function LibraryPage() {
       .get(`${API_URL}/api/library`, {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
-      .then((response) => setBooks(response.data))
+      .then((response) =>
+        // setBooks(response.data))
+        {
+          // Filter out the books owned by the logged-in user
+          const filteredBooks = response.data.filter((book) => {
+            console.log("Book:", book, user);
+            return book.offeredBy._id !== user._id; 
+          });
+
+          setBooks(filteredBooks);
+        }
+      )
       .catch((error) => console.log(error));
   };
 
   // We set this effect will run only once, after the initial render
-  // by setting the empty dependency array - []
   useEffect(() => {
     getAllBooks();
   }, []);
