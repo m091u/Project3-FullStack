@@ -4,7 +4,6 @@ import axios from "axios";
 const API_URL = "http://localhost:4005";
 
 function AddBook(props) {
-
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [genre, setGenre] = useState("");
@@ -64,7 +63,7 @@ function AddBook(props) {
 
   return (
     <div className="AddBookPage">
-      <h3 className="addBookTitle">Add your Dog-Eared Book</h3>
+      <p className="addBookTitle">Add Your Dog-Eared Book</p>
 
       <form onSubmit={handleSubmit}>
         <label></label>
@@ -107,23 +106,23 @@ function AddBook(props) {
           onChange={(e) => setGenre(e.target.value)}
         >
           <option value="">Select Genre *</option>
-          <option value="Fiction">Fiction</option>
-          <option value="Non-Fiction">Non-Fiction</option>
-          <option value="Mystery">Mystery</option>
-          <option value="Science Fiction">Science Fiction</option>
-          <option value="Fantasy">Fantasy</option>
-          <option value="Romance">Romance</option>
-          <option value="Thriller">Thriller</option>
+          <option value="Art">Art</option>
           <option value="Biography">Biography</option>
-          <option value="Self-Help">Self-Help</option>
-          <option value="Philosophy">Philosophy</option>
-          <option value="Travel">Travel</option>
-          <option value="Science">Science</option>
           <option value="Business">Business</option>
-          <option value="Adventure">Adventure</option>
-          <option value="Children's Literature">Children's Literature</option>
-          <option value="Autobiography">Autobiography</option>
+          <option value="Children's Books">Children's Literature</option>
           <option value="Cookbook">Cookbook</option>
+          <option value="Fantasy">Fantasy</option>
+          <option value="Fiction">Fiction</option>
+          <option value="Mystery">Mystery</option>
+          <option value="Non-Fiction">Non-Fiction</option>
+          <option value="Philosophy">Philosophy</option>
+          <option value="Psychology">Psychology</option>
+          <option value="Romance">Romance</option>
+          <option value="Science">Science</option>
+          <option value="Science Fiction">Science Fiction</option>
+          <option value="Self Help">Self-Help</option>
+          <option value="Thriller">Thriller</option>
+          <option value="Travel">Travel</option>
         </select>
         <p className="error-message">{genreError}</p>
 

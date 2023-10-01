@@ -36,40 +36,51 @@ function BookDetailsPage(props) {
   }, []);
 
   return (
-    <div className="BookDetails">
-      {book && (
-        <>
-          <img src={book.coverImage} width="200px" />
-          <h2>{book.title}</h2>
-          <h2>{book.author}</h2>
-          <p>
-            <strong>Genre: </strong>
-            {book.genre}
-          </p>
-          <p>
-            <strong>Description: </strong> {book.description}
-          </p>
-          <p>
-            <strong>Language: </strong> {book.language}
-          </p>
-          <p>
-            <strong>Owner review: </strong> {book.review}
-          </p>
-          <p>
-            <strong>Owner: </strong>
-            <a href={`/profile/`}>{book.offeredBy.name}</a>
-          </p>
-        </>
-      )}
+    <>
+      <div className="bookDetails">
+        {book && (
+          <>
+            <div className="bookDetailCover">
+              <img
+                src={book.coverImage}
+                width="220px"
+                className="rounded-image"
+              />
+            </div>
+            <div className="bookInfo">
+              <h2>{book.title}</h2>
+              <p>by <strong>{book.author}</strong></p>
+              <p>
+                <strong>Genre: </strong>
+                {book.genre}
+              </p>
+              <p>
+                <strong>Description: </strong> {book.description}
+              </p>
+              <p>
+                <strong>Language: </strong> {book.language}
+              </p>
+              <p>
+                <strong>Owner review: </strong> {book.review}
+              </p>
+              <p className="bookOwner">
+                <strong>Book Owner: </strong>
+                <a href={`/profile/`}>{book.offeredBy.name}</a>
+              </p>
+            </div>
+          </>
+        )}
+      </div>
+      <div className="bookButtons">
+        <Link to="/library">
+          <button>Back to Library</button>
+        </Link>
 
-      <Link to="/library">
-        <button>Back to Library</button>
-      </Link>
-
-      <Link to="">
-        <button>Request Book</button>
-      </Link>
-    </div>
+        <Link to="">
+          <button>Request Book</button>
+        </Link>
+      </div>
+    </>
   );
 }
 

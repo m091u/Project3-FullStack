@@ -6,10 +6,10 @@ function BookCard ( { coverImage ,title, author, _id } ) {
   return (
     <div className="BookCard">
       <Link to={`/library/${_id}`}>
-        <img src={coverImage} width="150px"/>
-        <h3>{title}</h3>
+        <img src={coverImage} width="190px" className="bookCover"/>
+        <p><strong>{title}</strong></p>
       </Link>
-      <h3>Author: {author}</h3>
+      <p>Author: {author}</p>
       {/* <p style={{ maxWidth: "400px" }}>{description} </p> */}
     </div>
   );

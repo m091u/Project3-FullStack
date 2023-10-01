@@ -3,6 +3,7 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react"; // <== IMPORT
 import { AuthContext } from "../context/auth.context";
+// import logo from "../assets/logo.png";
 
 function Navbar() {
   // Subscribe to the AuthContext to gain access to
@@ -15,7 +16,8 @@ function Navbar() {
   return (
     <nav className="nav">
       <Link to="/">
-        <button>readCycle📚</button>
+        <button>readCycle </button>
+        {/* <img img src={logo} alt="logo" width="40" height="40" /> */}
       </Link>
 
       <Link to="/about">
@@ -28,12 +30,13 @@ function Navbar() {
             <button>Library</button>
           </Link>
 
-          <Link to="/profile">
-            <button>User Profile</button>
+          <Link to="/profile" className="profileButton">
+            <button><span>{user && user.name}</span></button>
+            
           </Link>
 
           <button onClick={logOutUser}>Logout</button>
-          <span>{user && user.name}</span>
+         
         </>
       )}
 

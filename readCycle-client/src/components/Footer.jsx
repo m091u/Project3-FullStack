@@ -27,7 +27,7 @@ function Footer() {
         </a>
       </div>
       <div className="copyright">
-        &copy; {new Date().getFullYear()} readCycle📚. All Rights
+        &copy; {new Date().getFullYear()} readCycle. All Rights
         Reserved.
       </div>
     </footer>

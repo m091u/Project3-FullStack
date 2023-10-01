@@ -23,12 +23,32 @@ const userSchema = new Schema({
   },
   avatarUrl: {
     type: String,
-    default: "images/default-avatar.png",
+    default: "../public/images/6388000.png",
   },
   booksOffered: [{ type: Schema.Types.ObjectId, ref: "Book" }],
   booksReceived: [{ type: Schema.Types.ObjectId, ref: "Book" }],
+  location: {
+    type: String,
+    trim: true,
+    enum: [
+      "Charlottenburg-Wilmersdorf",
+      "Friedrichshain-Kreuzberg",
+      "Lichtenberg",
+      "Marzahn-Hellersdorf",
+      "Mitte",
+      "Neukölln",
+      "Pankow",
+      "Reinickendorf",
+      "Spandau",
+      "Steglitz-Zehlendorf",
+      "Tempelhof-Schöneberg",
+      "Treptow-Köpenick",
+    ],
+  },
   booksOfferedScore: Number,
   booksReceivedScore: Number,
 });
+
+
 
 module.exports = model("User", userSchema);

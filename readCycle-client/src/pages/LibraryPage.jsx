@@ -12,6 +12,8 @@ const API_URL = "http://localhost:4005";
 function LibraryPage() {
   const [books, setBooks] = useState([]);
   const { user } = useContext(AuthContext);
+  const [filteredBooks, setFilteredBooks] = useState([]); // Store the initial list of books
+  const [selectedGenre, setSelectedGenre] = useState([]);
 
   const getAllBooks = () => {
     // Get the token from the localStorage
@@ -23,19 +25,31 @@ function LibraryPage() {
       .get(`${API_URL}/api/library`, {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
-      .then((response) =>
-        // setBooks(response.data))
-        {
-          // Filter out the books owned by the logged-in user
-          const filteredBooks = response.data.filter((book) => {
-            console.log("Book:", book, user);
-            return book.offeredBy._id !== user._id; 
-          });
+      .then((response) => {
+        // Filter out the books owned by the logged-in user
+        const filteredBooks = response.data.filter((book) => {
+          console.log("Book:", book, user);
+          return book.offeredBy._id !== user._id;
+        });
 
-          setBooks(filteredBooks);
-        }
-      )
+        setBooks(filteredBooks);
+      })
       .catch((error) => console.log(error));
+  };
+
+  //filter by category
+  const handleGenreChange = (e) => {
+    const selectedGenre = e.target.value;
+    setSelectedGenre([selectedGenre]);
+
+    if (selectedGenre === "") {
+      setBooks(filteredBooks); // Restore the initial list of books
+    } else {
+      const filteredGenre = filteredBooks.filter(
+        (book) => book.genre === selectedGenre
+      );
+      setBooks(filteredGenre);
+    }
   };
 
   // We set this effect will run only once, after the initial render
@@ -44,22 +58,53 @@ function LibraryPage() {
   }, []);
 
   return (
-    <div className="LibraryPage">
+    <>
       <div className="libraryHeader">
-        <h1>Library Page</h1>
-        <p>Our books are waiting for you to provide them with a new home.</p>
+        <div className="headerText">
+          <h3>Explore the library</h3>
+          <p>Our books are ready for a thrilling new chapter with you!</p>
+        </div>
       </div>
 
-      <Link to="/add-book">Add Your Dog-Eared Book</Link>
-      <h2>Available books</h2>
-      <div className="">
+      <div className="libraryPage">
+        <Link to="/add-book" className="link-button">
+          Add Your Dog-Eared Book
+        </Link>
+
+        <select
+          className="genre-select"
+          value={selectedGenre}
+          onChange={handleGenreChange}
+        >
+          <option value="">All Genre</option>
+          <option value="Art">Art</option>
+          <option value="Biography">Biography</option>
+          <option value="Business">Business</option>
+          <option value="Children's Books">Children's Literature</option>
+          <option value="Cookbook">Cookbook</option>
+          <option value="Fantasy">Fantasy</option>
+          <option value="Fiction">Fiction</option>
+          <option value="Mystery">Mystery</option>
+          <option value="Non-Fiction">Non-Fiction</option>
+          <option value="Philosophy">Philosophy</option>
+          <option value="Psychology">Psychology</option>
+          <option value="Romance">Romance</option>
+          <option value="Science">Science</option>
+          <option value="Science Fiction">Science Fiction</option>
+          <option value="Self Help">Self-Help</option>
+          <option value="Thriller">Thriller</option>
+          <option value="Travel">Travel</option>
+        </select>
+
         <div className="booksContainer">
           {books.map((book) => (
-            <BookCard key={book._id} {...book} />
+            <div className="bookContainer" key={book._id}>
+              <BookCard {...book} />
+            </div>
           ))}
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

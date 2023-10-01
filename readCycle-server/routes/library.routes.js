@@ -3,6 +3,7 @@ const router = express.Router();
 const mongoose = require("mongoose");
 
 const Book = require("../models/Book.model");
+const User = require("../models/User.model");
 
 //POST/api/books - create new book
 router.post("/library", (req, res) => {
@@ -25,13 +26,25 @@ router.post("/library", (req, res) => {
     isDelivered: false,
     booked: false,
   })
-    .then((response) => {
-      console.log(response);
-      res.json(response);
+    .then((book) => {
+      // Add the newly created book to booksOffered
+      return User.findByIdAndUpdate(userId, {
+        $push: {
+          booksOffered: {
+            _id: book._id,
+            title: book.title,
+            author: book.author,
+            cover: book.coverImage,
+          },
+        },
+      });
+    })
+    .then(() => {
+      res.status(201).json({ message: "Book created successfully" });
     })
     .catch((err) => {
-      console.log(err);
-      res.json(err);
+      console.error(err);
+      res.status(500).json(err);
     });
 });
 

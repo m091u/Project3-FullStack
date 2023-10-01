@@ -3,12 +3,14 @@ import aboutImg from "../assets/library-default.jpg";
 function AboutPage() {
   return (
     <>
-      <div className="aboutContainer">
-        <div className="aboutShape">
+    <div className="about">
+    <div className="aboutContainer">
+      <div></div>
+        <div className="aboutBox">
           <h3>What is readCycle all about?</h3>
           <p>
-            Sharing Stories, One Book at a Time: Dive into the Book Exchange
-            Experience.
+            Sharing Stories, One Book at a Time <br></br>  Dive into the Book Sharing
+            Experience
           </p>
           <p>
             We're all about spreading book love and good reads. <br></br>Join
@@ -18,10 +20,10 @@ function AboutPage() {
           </p>
         </div>
 
-        <div className="aboutShape2">
+        <div className="aboutBox">
           <h3>How it works?</h3>
           <p>
-            Getting started is a breeze! Simply add the books you're willing to
+            Getting started is a breeze! <br></br> Simply add the books you're willing to
             exchange to our platform. <br></br> When you spot a book you'd love
             to read, just let the owner know, and you can kick off a friendly
             chat to arrange the exchange details. <br></br> It's all about
@@ -29,6 +31,8 @@ function AboutPage() {
           </p>
         </div>
       </div>
+    </div>
+
     </>
   );
 }

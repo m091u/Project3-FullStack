@@ -2,6 +2,7 @@ body,
 html {
   margin: 0;
   padding: 0;
+  font-family: "Roboto", sans-serif;
 }
 
 *,
@@ -10,8 +11,36 @@ html {
   box-sizing: border-box;
 }
 
+.homePage {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers horizontally */
+  justify-content: center; /* Centers vertically */
+  text-align: center;
+}
 .homeContainer {
-  min-height: 80vh;
+  /* padding-bottom: 20px; */
+}
+
+.homeContainer button {
+  padding: 10px;
+  border: none;
+  background-color: #9ab5d1;
+  color: aliceblue;
+  font-weight: 600;
+  border-radius: 5px;
+  width: 45%;
+  margin-top: 20px;
+  font-size: 1.1em;
+}
+
+.bookCover {
+  background-size: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+  z-index: 2;
+  overflow: hidden;
 }
 
 /* CSS for the Signup/Login Component */
@@ -54,6 +83,7 @@ input {
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.6);
   border-radius: 10px;
   width: 80%;
+  font-size: 1em;
 }
 
 input[type="email"] {
@@ -76,6 +106,7 @@ input[type="password"] {
   background-size: 20px 20px;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.6);
   padding-left: 35px;
+  font-size: 1em;
 }
 
 #genre {
@@ -86,6 +117,7 @@ input[type="password"] {
   border-radius: 10px;
   width: 80%;
   color: rgb(122, 118, 118);
+  font-size: 1em;
 }
 
 textarea {
@@ -97,6 +129,7 @@ textarea {
   border: 0;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.6);
   height: 70px;
+  font-size: 1.1em;
 }
 
 .Signup button,
@@ -104,7 +137,7 @@ textarea {
 .AddBookPage button {
   padding: 10px;
   border: none;
-  background-color: #5db1a2;
+  background-color: #9ab5d1;
   color: aliceblue;
   font-weight: 600;
   border-radius: 5px;
@@ -114,7 +147,7 @@ textarea {
 }
 
 .AddBookPage {
-  background-image: url(./assets/page-turner.svg);
+  background-image: url(./assets/book.png);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -123,78 +156,160 @@ textarea {
 }
 
 .addBookTitle {
-  margin: auto;
+  margin: 0px 15px !important;
   color: rgb(218, 210, 203);
   font-size: 1.5em;
-  padding-top: 25px;
+  padding-top: 20px;
 }
 
-.BookDetails {
-  margin-top: 20px;
+.bookDetails {
+  display: inline-block;
+  margin: 20px;
 }
 
-.LibraryPage {
-  margin: 10px 20px 90px 20px;
+.libraryPage {
+  margin: 30px 30px 90px 20px;
 }
-
 .booksContainer {
   display: inline;
+  /* width: 130px; */
+  min-height: 267px;
+  text-align: center;
+}
+
+.libraryHeader {
+  background-image: url(../src/assets/library-default.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-top: 40px;
+  text-align: center;
+  min-height: 200px;
+}
+
+.headerText {
+  color: rgb(98, 164, 221);
+  font-size: 1.4em;
+}
+
+/* about page style */
+.about {
+  background-image: url(./assets/book.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
 }
 
 .aboutContainer {
-  position: relative;
-}
-
-.aboutShape {
-  position: absolute;
-  top: 10%;
-  left: 30%;
-  transform: translate(-80%, 10%);
-  background-size: 200px 200px;
-  border-radius: 80% 20% 32% 68% / 58% 22% 78% 42%;
-  height: 410px;
-  width: 490px;
-  background: linear-gradient(45deg, #ff6b6b, #70a1ff);
-  display: flex; /* Use flexbox */
-  flex-direction: column;
-  align-items: center; /* Vertically center items */
-  justify-content: center; /* Horizontally center items */
-  text-align: center; /* Center text inside */
-  color: aliceblue;
-}
-
-.aboutShape2 {
-  position: absolute;
-  top: 90%;
-  left: 60%;
-  transform: translate(-10%, 50%);
-  width: 500px;
-  height: 450px;
-  background: linear-gradient(45deg, #ff6b6b, #70a1ff);
-  border-radius: 60% 8% 60% 40% / 50% 60% 40% 60%;
   display: flex;
   flex-direction: column;
+  gap: 30px;
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-size: 1.2em;
-  color: aliceblue;
 }
 
-.aboutImg {
-  position: absolute;
-  bottom: 60px;
+.aboutBox {
+  width: 60%;
+  background: linear-gradient(80deg, #484849, #b9b9ba);
+  border-radius: 20px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  text-align: center;
+  font-size: 1.1em;
+  line-height: 1.5;
+  color: aliceblue;
 }
 
 .nav {
   min-height: 60px;
-  background-color: #001055;
+  background-color: aliceblue;
 }
 
 .AddBookPage p {
   color: aliceblue;
   margin-top: 2px;
 }
+
+.booksContainer {
+  display: grid;
+  grid-gap: 25px;
+  padding: 0;
+  grid-template-columns: repeat(auto-fill, minmax(205px, 1fr));
+}
+
+.bookContainer {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: aliceblue;
+  box-shadow: 0 4px 6px #0000001a;
+  transition: box-shadow 0.6s ease-in-out;
+
+  /* Add a media query for smaller screens */
+  @media (max-width: 768px) {
+    /* Change the number of columns to adjust for smaller screens */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+}
+
+.link-button,
+.genre-select {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #9ab5d1;
+  color: #fff;
+  text-decoration: none;
+  font-size: 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+  margin: 10px 10px 30px;
+  min-width: 200px;
+}
+
+.link-button:hover,
+.category-select:hover {
+  background-color: #0056b3; /* Button background color on hover */
+}
+
+/* CSS for book details page */
+.bookDetails {
+  display: flex;
+}
+
+.bookDetailCover {
+  margin-right: 20px;
+}
+
+.bookInfo {
+  font-size: 1.1em;
+  margin-right: 150px;
+}
+
+.bookOwner a {
+  text-decoration: none;
+}
+
+.bookButtons button {
+  margin: 10px 5px 10px 30px;
+  padding: 10px 20px;
+  background-color: #9ab5d1;
+  color: aliceblue;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.1em;
+}
+
+.bookButtons button:hover {
+  background-color: #0056b3;
+}
+
+.bookDetailCover img {
+  margin: 15px;
+}
+
 /* CSS for the Footer Component */
 .footer {
   display: flex;
@@ -222,4 +337,8 @@ textarea {
 
 .copyright {
   order: -1;
+}
+
+.rounded-image {
+  border-radius: 10px;
 }
