@@ -13,43 +13,41 @@ function LibraryPage() {
   const [books, setBooks] = useState([]);
   const { user } = useContext(AuthContext);
   const [filteredBooks, setFilteredBooks] = useState([]); // Store the initial list of books
-  const [selectedGenre, setSelectedGenre] = useState([]);
+  const [selectedGenre, setSelectedGenre] = useState("");
 
   const getAllBooks = () => {
     // Get the token from the localStorage
     const storedToken = localStorage.getItem("authToken");
-
-    // Send the token through the request "Authorization" Headers
 
     axios
       .get(`${API_URL}/api/library`, {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
-        // Filter out the books owned by the logged-in user
-        const filteredBooks = response.data.filter((book) => {
-          console.log("Book:", book, user);
-          return book.offeredBy._id !== user._id;
-        });
-
+        const filteredBooks = response.data.filter(
+          (book) => book.offeredBy._id !== user._id
+        );
         setBooks(filteredBooks);
       })
       .catch((error) => console.log(error));
   };
 
-  //filter by category
-  const handleGenreChange = (e) => {
-    const selectedGenre = e.target.value;
-    setSelectedGenre([selectedGenre]);
+  //filter by genre
+  const handleOptionSelect = (event) => {
+    const storedToken = localStorage.getItem("authToken");
+    setSelectedGenre(event.target.value);
 
-    if (selectedGenre === "") {
-      setBooks(filteredBooks); // Restore the initial list of books
-    } else {
-      const filteredGenre = filteredBooks.filter(
-        (book) => book.genre === selectedGenre
-      );
-      setBooks(filteredGenre);
-    }
+    axios
+      .get(`${API_URL}/api/filter?bookGenre=${event.target.value}`, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
+      .then((foundBooks) => {
+        console.log(foundBooks);
+        if (foundBooks.data) {
+          setBooks(foundBooks.data);
+        }
+      })
+      .catch((error) => console.error(error));
   };
 
   // We set this effect will run only once, after the initial render
@@ -74,7 +72,7 @@ function LibraryPage() {
         <select
           className="genre-select"
           value={selectedGenre}
-          onChange={handleGenreChange}
+          onChange={handleOptionSelect}
         >
           <option value="">All Genre</option>
           <option value="Art">Art</option>

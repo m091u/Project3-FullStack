@@ -23,6 +23,9 @@ app.use("/api", indexRoutes);
 const libraryRouter = require("./routes/library.routes");
 app.use("/api", isAuthenticated, libraryRouter);
 
+const bookRoutes = require("./routes/book.routes");
+app.use("/api", isAuthenticated, bookRoutes);
+
 const userRoutes = require("./routes/user.routes");
 app.use("/api", userRoutes);
 

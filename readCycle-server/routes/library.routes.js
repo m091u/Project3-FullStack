@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const Book = require("../models/Book.model");
 const User = require("../models/User.model");
 
-//POST/api/books - create new book
+//POST - create new book
 router.post("/library", (req, res) => {
   const { title, author, genre, description, language, coverImage, review } =
     req.body;
@@ -48,7 +48,7 @@ router.post("/library", (req, res) => {
     });
 });
 
-//  GET /api/books -  Retrieves all of the books
+//  GET  -  Retrieves all of the books
 router.get("/library", (req, res, next) => {
   Book.find()
     .populate("offeredBy")
@@ -56,7 +56,7 @@ router.get("/library", (req, res, next) => {
     .catch((err) => res.json(err));
 });
 
-//  GET /api/books/:bookId -  Retrieves a specific book by id
+//  GET  -  Retrieves a specific book by id
 router.get("/library/:bookId", (req, res, next) => {
   const { bookId } = req.params;
 
@@ -81,5 +81,6 @@ router.get("/library/:bookId", (req, res, next) => {
     })
     .catch((error) => res.json(error));
 });
+
 
 module.exports = router;

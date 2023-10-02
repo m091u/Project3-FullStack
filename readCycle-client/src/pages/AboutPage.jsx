@@ -1,4 +1,4 @@
-import aboutImg from "../assets/library-default.jpg";
+
 
 function AboutPage() {
   return (
@@ -12,12 +12,14 @@ function AboutPage() {
             Sharing Stories, One Book at a Time <br></br>  Dive into the Book Sharing
             Experience
           </p>
+          
           <p>
             We're all about spreading book love and good reads. <br></br>Join
             our book exchange community to swap your favorite stories, discover
-            new adventures, and connect with fellow book enthusiasts who can't
+            new adventures, and connect with other book enthusiasts who can't
             wait to share their literary treasures with you!
           </p>
+          <img />
         </div>
 
         <div className="aboutBox">
@@ -28,6 +30,7 @@ function AboutPage() {
             to read, just let the owner know, and you can kick off a friendly
             chat to arrange the exchange details. <br></br> It's all about
             connecting with fellow bookworms and sharing the joy of reading!
+            <img />
           </p>
         </div>
       </div>

@@ -8,6 +8,8 @@ import LoginPage from "./pages/LoginPage";
 import AboutPage from "./pages/AboutPage";
 import BookDetailsPage from "./pages/BookDetailsPage";
 import ProfilePage from "./pages/UserProfilePage";
+import BookEdit from "./components/BookEdit";
+import ProfileEdit from "./components/ProfileEdit";
 import LibraryPage from "./pages/LibraryPage";
 import AddBook from "./components/AddBook";
 import IsPrivate from "./components/IsPrivate";
@@ -51,11 +53,28 @@ function App() {
         />
 
         <Route
-          exact
           path="/profile"
           element={
             <IsPrivate>
               <ProfilePage />
+            </IsPrivate>
+          }
+        />
+
+        <Route
+          path="/profile/edit"
+          element={
+            <IsPrivate>
+              <ProfileEdit />
+            </IsPrivate>
+          }
+        />
+
+        <Route
+          path="/edit/:bookId"
+          element={
+            <IsPrivate>
+              <BookEdit />
             </IsPrivate>
           }
         />

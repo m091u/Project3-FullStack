@@ -1,83 +1,136 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import ProfileEdit from "../components/ProfileEdit";
+import BookEdit from "../components/BookEdit";
 
 function ProfilePage() {
   const [user, setUser] = useState();
   const [userOfferedBooks, setUserOfferedBooks] = useState([]);
+  const { bookId } = useParams();
+  const [needsReloads, setNeedsReloads] = useState(true);
 
   const API_URL = "http://localhost:4005";
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Make a request to get user details from the backend
+    if (needsReloads) {
+      // Make a request to get user details from the backend
+      const storedToken = localStorage.getItem("authToken");
+
+      axios
+        .get(`${API_URL}/api/profile`, {
+          headers: { Authorization: `Bearer ${storedToken}` },
+        })
+        .then((response) => {
+          // console.log("Response:", response.data);
+          const userData = response.data;
+          setUser(userData);
+
+          // Filter the userOfferedBooks to only include books with the same user ID
+          const userBooks = response.data.userOfferedBooks.filter(
+            (book) => book.offeredBy._id === userData._id
+          );
+          setUserOfferedBooks(userBooks);
+          setNeedsReloads(false);
+        })
+        .catch((error) => {
+          console.error("Error fetching user details:", error);
+        });
+    }
+  }, [needsReloads]);
+
+  const handleDeleteBook = (bookId) => {
+    // Get the token from the localStorage
     const storedToken = localStorage.getItem("authToken");
 
+    // Send the token through the request "Authorization" Headers
     axios
-      .get(`${API_URL}/api/profile`, {
+      .delete(`${API_URL}/api/profile/${bookId}`, {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
-      .then((response) => {
-        console.log("Response:", response.data);
-        const userData = response.data;
-        setUser(userData);
-
-        // Filter the userOfferedBooks to only include books with the same user ID
-        const userBooks = response.data.userOfferedBooks.filter(
-          (book) => book.offeredBy._id === userData._id
-        );
-        setUserOfferedBooks(userBooks);
+      .then(() => {
+        // Remove the deleted book from the state
+        // setUserOfferedBooks((prevBooks) =>
+        //   prevBooks.filter((book) => book._id !== bookId)
+        // );
+        // navigate("/profile");
+        setNeedsReloads(true);
       })
-      .catch((error) => {
-        console.error("Error fetching user details:", error);
-      });
-  }, []);
+      .catch((err) => console.log(err));
+  };
 
   return (
-    <div>
+    <div className="profile-container">
       {user ? (
-        <>
-          <div>
-            <img src={user.user.avatarUrl} width="200px" alt="avatar" />
-            <p>
-              <strong>{user.user.name}</strong>
-            </p>
-            <p>Reading challenge</p>
-            <p>Choose how many books you will read this year</p>
-            <p>Settings</p>
-          </div>
-        </>
+        <div className="user-details">
+          <img src={user.user.avatar} width="200px" alt="avatar" />
+          <p>
+            <strong>{user.user.name}</strong>
+          </p>
+          <ul className="profile-list">
+            <li>
+              <p>Reading challenge</p>
+              <p>Choose how many books you will read this year</p>
+            </li>
+            <li>
+              <Link to="/add-book" className="add-button">
+                Add Your Dog-Eared Book
+              </Link>
+            </li>
+            <li>
+              <Link to="/profile/edit" className="edit-button">
+                Settings
+              </Link>
+            </li>
+          </ul>
+        </div>
       ) : (
         <p>Loading...</p>
       )}
 
-      <div className="booksOffered">
-        <p>Books Offered:</p>
-        {user ? (
-          <ul>
-            {user.userOfferedBooks.map((book, index) => (
-              <li key={index}>
-                <img
-                  src={book.coverImageUrl}
-                  alt="book cover"
-                  width="150"
-                  height="150"
-                />
-                <div>
-                  <strong>Title:</strong> {book.title}
-                  <br />
-                  <strong>Author:</strong> {book.author}
-                </div>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>Loading...</p>
-        )}
-      </div>
+      <div className="book-details">
+        <div className="booksOffered">
+          <p>
+            <strong>Books Offered</strong>
+          </p>
+          <p>Already Shared</p>
+          {user ? (
+            <ul className="booksShared">
+              {user.userOfferedBooks.map((book, index) => (
+                <li key={index} className="profileBooks">
+                  <img
+                    src={book.coverImageUrl}
+                    alt="book cover"
+                    width="150"
+                    height="150"
+                  />
+                  <div>
+                    <strong>Title:</strong> {book.title}
+                    <br />
+                    <strong>Author:</strong> {book.author}
+                    <br />
+                    <Link to={`/edit/${book._id}`}>Edit</Link>
+                    <button onClick={() => handleDeleteBook(book._id)}>
+                      Delete
+                    </button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>Loading...</p>
+          )}
+          <p>Requests Pending</p>
+        </div>
 
-      <div className="booksReceived">
-        <p>Books Received:</p>
-
+        <div className="booksReceived">
+          <p>
+            <strong>Books Received</strong>
+          </p>
+          <p>Already received</p>
+          <p>Pending requests</p>
+        </div>
       </div>
     </div>
   );

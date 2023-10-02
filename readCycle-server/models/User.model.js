@@ -21,7 +21,7 @@ const userSchema = new Schema({
       "❕ Password must have at least 6 characters and contain at least one number, one lowercase and one uppercase letter.",
     ],
   },
-  avatarUrl: {
+  avatar: {
     type: String,
     default: "../public/images/6388000.png",
   },

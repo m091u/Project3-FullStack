@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const API_URL = "http://localhost:4005";
 
@@ -17,6 +18,8 @@ function AddBook(props) {
   const [authorError, setAuthorError] = useState("");
   const [genreError, setGenreError] = useState("");
   const [coverImageError, setCoverImageError] = useState("");
+
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -56,9 +59,13 @@ function AddBook(props) {
         setLanguage("");
         setCoverImage("");
         setReview("");
-        props.refreshBooks();
+        navigate(-1);
       })
       .catch((error) => console.log(error));
+  };
+
+  const refreshBooks = () => {
+    navigate(-1);
   };
 
   return (

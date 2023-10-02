@@ -18,9 +18,6 @@ html {
   justify-content: center; /* Centers vertically */
   text-align: center;
 }
-.homeContainer {
-  /* padding-bottom: 20px; */
-}
 
 .homeContainer button {
   padding: 10px;
@@ -134,7 +131,8 @@ textarea {
 
 .Signup button,
 .Login button,
-.AddBookPage button {
+.AddBookPage button,
+.BookEditPage button {
   padding: 10px;
   border: none;
   background-color: #9ab5d1;
@@ -155,10 +153,55 @@ textarea {
   min-height: 100vh;
 }
 
+.BookEditPage {
+  background-image: url(./assets/book.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding-left: 20px;
+  min-height: 100vh;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.form-group label {
+  flex: 1; /* Labels take up 1/3 of the available space */
+  text-align: left;
+  padding-right: 10px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group textarea,
+.form-group select {
+  flex: 6;
+  width: 60%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.form-group:not(:last-child) {
+  margin-bottom: 15px;
+}
+
+.BookEditPage {
+  color: rgb(64, 66, 68);
+}
+
 .addBookTitle {
   margin: 0px 15px !important;
   color: rgb(218, 210, 203);
-  font-size: 1.5em;
+  font-size: 1.6em;
+  padding-top: 20px;
+}
+.editBookTitle {
+  margin: 0px 15px !important;
+  color: rgb(218, 210, 203);
+  font-size: 1.6em;
   padding-top: 20px;
 }
 
@@ -196,7 +239,7 @@ textarea {
   background-image: url(./assets/book.png);
   background-size: cover;
   background-repeat: no-repeat;
-  height: 100vh;
+  height: 90vh;
 }
 
 .aboutContainer {
@@ -270,7 +313,7 @@ textarea {
 
 .link-button:hover,
 .category-select:hover {
-  background-color: #0056b3; /* Button background color on hover */
+  background-color: #0056b3;
 }
 
 /* CSS for book details page */
@@ -309,6 +352,71 @@ textarea {
 .bookDetailCover img {
   margin: 15px;
 }
+
+/* Home page style */
+.homePage {
+  background-image: url(.//assets/books_background.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+.homeContent {
+  background-color: rgba(127, 169, 218, 0.9);
+  padding: 50px;
+  font-size: 1.6em;
+  line-height: 1.5;
+  color: aliceblue;
+}
+
+/* CSS for user profile */
+.profile-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+.user-details {
+  padding: 20px;
+  height: 85vh;
+  background-color: #f6f2f2;
+}
+.profile-list {
+  list-style: none;
+  padding: 0;
+  /* flex-shrink: 1; */
+}
+.profile-list li {
+  margin: 40px 0 40px 0;
+}
+.book-details {
+  padding: 20px;
+  flex-grow: 4;
+}
+.profileBooks {
+  padding: 10px;
+  list-style: none;
+}
+.booksShared {
+  display: flex;
+}
+
+/* CSS for profile edit */
+.profileEdit{
+  width: 400px;
+}
+.profileEdit input{
+  padding: 7px;
+  box-shadow: 3px 3px 5px grey;
+  font-size: 14px;
+  font-weight: 600;
+  width: 300px;
+}
+
+.profileEdit label {
+  color: #B4886B;
+  font-weight: bold;
+  display: block;
+}
+.profileEdit label:after { content: ": " }
+
 
 /* CSS for the Footer Component */
 .footer {
