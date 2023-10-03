@@ -23,7 +23,8 @@ const userSchema = new Schema({
   },
   avatar: {
     type: String,
-    default: "../public/images/6388000.png",
+    default: "/images/avatar1.png",
+    // "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png",
   },
   booksOffered: [{ type: Schema.Types.ObjectId, ref: "Book" }],
   booksReceived: [{ type: Schema.Types.ObjectId, ref: "Book" }],
@@ -48,7 +49,5 @@ const userSchema = new Schema({
   booksOfferedScore: Number,
   booksReceivedScore: Number,
 });
-
-
 
 module.exports = model("User", userSchema);

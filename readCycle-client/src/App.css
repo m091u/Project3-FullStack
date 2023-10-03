@@ -11,7 +11,12 @@ html {
   box-sizing: border-box;
 }
 
+/* Home page style */
 .homePage {
+  background-image: url(.//assets/books_background.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center; /* Centers horizontally */
@@ -19,16 +24,25 @@ html {
   text-align: center;
 }
 
+.homeContent {
+  background-color: rgba(200, 195, 152, 0.9);
+  padding: 15px;
+  border-radius: 20px;
+  font-size: 1.7em;
+  line-height: 1.5;
+  color: aliceblue;
+}
+
 .homeContainer button {
   padding: 10px;
   border: none;
-  background-color: #9ab5d1;
+  background-color: #83866d;
   color: aliceblue;
-  font-weight: 600;
-  border-radius: 5px;
+  font-weight: 400;
+  border-radius: 10px;
   width: 45%;
-  margin-top: 20px;
-  font-size: 1.1em;
+  margin-bottom: 10px;
+  font-size: 1em;
 }
 
 .bookCover {
@@ -83,7 +97,8 @@ input {
   font-size: 1em;
 }
 
-input[type="email"] {
+.Signup input[type="email"],
+.Login input[type="email"] {
   background: url(./assets/icons8-email-24.png) no-repeat 7px 8px;
   background-size: 20px 20px;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.6);
@@ -135,7 +150,7 @@ textarea {
 .BookEditPage button {
   padding: 10px;
   border: none;
-  background-color: #9ab5d1;
+  background-color: #83866d;
   color: aliceblue;
   font-weight: 600;
   border-radius: 5px;
@@ -153,56 +168,47 @@ textarea {
   min-height: 100vh;
 }
 
-.BookEditPage {
+.bookEditPage {
   background-image: url(./assets/book.png);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  padding-left: 20px;
-  min-height: 100vh;
+  padding-left: 25px;
+  /* height: 90vh;  */
+  overflow: auto;
 }
 
 .form-group {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  position: relative;
 }
 .form-group label {
-  flex: 1; /* Labels take up 1/3 of the available space */
-  text-align: left;
-  padding-right: 10px;
+  display: block;
+  font-weight: bold;
 }
 
 .form-group input[type="text"],
-.form-group input[type="email"],
 .form-group textarea,
-.form-group select {
-  flex: 6;
+.form-group select,
+#genreEdit {
   width: 60%;
-  padding: 10px;
+  padding: 7px;
   border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.form-group:not(:last-child) {
-  margin-bottom: 15px;
-}
-
-.BookEditPage {
-  color: rgb(64, 66, 68);
+  border-radius: 6px;
 }
 
 .addBookTitle {
   margin: 0px 15px !important;
-  color: rgb(218, 210, 203);
+  color: rgb(70, 68, 66) !important;
   font-size: 1.6em;
-  padding-top: 20px;
+  padding: 20px 0 20px 0;
 }
 .editBookTitle {
-  margin: 0px 15px !important;
-  color: rgb(218, 210, 203);
+  margin: 0px !important;
+  color: rgb(34, 33, 32);
   font-size: 1.6em;
-  padding-top: 20px;
+  font-weight: bold;
+  padding: 20px 0 20px 0;
 }
 
 .bookDetails {
@@ -215,7 +221,6 @@ textarea {
 }
 .booksContainer {
   display: inline;
-  /* width: 130px; */
   min-height: 267px;
   text-align: center;
 }
@@ -230,8 +235,8 @@ textarea {
 }
 
 .headerText {
-  color: rgb(98, 164, 221);
-  font-size: 1.4em;
+  color: #784a89;
+  font-size: 1.6em;
 }
 
 /* about page style */
@@ -263,9 +268,46 @@ textarea {
   color: aliceblue;
 }
 
+/* Css navbar */
 .nav {
-  min-height: 60px;
-  background-color: aliceblue;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #c5c0c0;
+  padding: 15px 20px;
+}
+
+.nav-button-container {
+  display: flex;
+  align-items: center;
+}
+
+.nav-button {
+  background-color: #555;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 5px;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.nav-button:hover {
+  background-color: #777;
+}
+
+.userButton {
+  margin-right: 20px;
+}
+
+.nav-left {
+  float: left;
+}
+
+.nav-right {
+  float: right;
 }
 
 .AddBookPage p {
@@ -273,14 +315,16 @@ textarea {
   margin-top: 2px;
 }
 
-.booksContainer {
+.booksContainer,
+.booksShared {
   display: grid;
   grid-gap: 25px;
   padding: 0;
   grid-template-columns: repeat(auto-fill, minmax(205px, 1fr));
 }
 
-.bookContainer {
+.bookContainer,
+.profileBooks {
   border: 1px solid #ddd;
   border-radius: 5px;
   padding: 10px;
@@ -299,7 +343,7 @@ textarea {
 .genre-select {
   display: inline-block;
   padding: 10px 20px;
-  background-color: #9ab5d1;
+  background-color: #83866d;
   color: #fff;
   text-decoration: none;
   font-size: 20px;
@@ -353,21 +397,6 @@ textarea {
   margin: 15px;
 }
 
-/* Home page style */
-.homePage {
-  background-image: url(.//assets/books_background.png);
-  background-size: cover;
-  background-repeat: no-repeat;
-  height: 100vh;
-}
-.homeContent {
-  background-color: rgba(127, 169, 218, 0.9);
-  padding: 50px;
-  font-size: 1.6em;
-  line-height: 1.5;
-  color: aliceblue;
-}
-
 /* CSS for user profile */
 .profile-container {
   display: flex;
@@ -397,26 +426,77 @@ textarea {
 .booksShared {
   display: flex;
 }
+.userName {
+  font-size: 1.5em;
+}
+.userAvatar {
+  border-radius: 10px;
+}
+.add-button,
+.edit-button {
+  padding: 5px 10px;
+  background-color: #83866d;
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+.challenge {
+  padding: 5px 10px;
+  background-color: #83866d;
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+  max-width: 160px;
+}
 
 /* CSS for profile edit */
-.profileEdit{
-  width: 400px;
+.profileEdit {
+  background-image: url(./assets/book.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding-left: 40px;
+  padding-top: 20px;
+  min-height: 100vh;
+  /* width: 400px; */
+  margin: 0;
 }
-.profileEdit input{
+.profileEdit input,
+.profileEdit select {
   padding: 7px;
   box-shadow: 3px 3px 5px grey;
   font-size: 14px;
   font-weight: 600;
+  background-color: aliceblue;
+  border-radius: 7px;
   width: 300px;
 }
 
 .profileEdit label {
-  color: #B4886B;
   font-weight: bold;
   display: block;
 }
-.profileEdit label:after { content: ": " }
-
+.bookEditButton {
+  background-color: #e7e7e7; /* Green */
+  border: 2px solid gray;
+  color: rgb(13, 13, 13);
+  padding: 5px 10px;
+  margin-left: 10px;
+  margin-top: 10px;
+  min-width: 70px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
 
 /* CSS for the Footer Component */
 .footer {

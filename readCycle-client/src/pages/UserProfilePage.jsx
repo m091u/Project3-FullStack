@@ -50,11 +50,6 @@ function ProfilePage() {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then(() => {
-        // Remove the deleted book from the state
-        // setUserOfferedBooks((prevBooks) =>
-        //   prevBooks.filter((book) => book._id !== bookId)
-        // );
-        // navigate("/profile");
         setNeedsReloads(true);
       })
       .catch((err) => console.log(err));
@@ -64,13 +59,13 @@ function ProfilePage() {
     <div className="profile-container">
       {user ? (
         <div className="user-details">
-          <img src={user.user.avatar} width="200px" alt="avatar" />
-          <p>
+          <img  className="userAvatar" src={user.user.avatar} width="200px" alt="avatar" />
+          <p className="userName">
             <strong>{user.user.name}</strong>
           </p>
           <ul className="profile-list">
             <li>
-              <p>Reading challenge</p>
+              <p className="challenge">Reading challenge</p>
               <p>Choose how many books you will read this year</p>
             </li>
             <li>
@@ -94,7 +89,7 @@ function ProfilePage() {
           <p>
             <strong>Books Offered</strong>
           </p>
-          <p>Already Shared</p>
+          <p>Avaialble to share</p>
           {user ? (
             <ul className="booksShared">
               {user.userOfferedBooks.map((book, index) => (
@@ -110,8 +105,8 @@ function ProfilePage() {
                     <br />
                     <strong>Author:</strong> {book.author}
                     <br />
-                    <Link to={`/edit/${book._id}`}>Edit</Link>
-                    <button onClick={() => handleDeleteBook(book._id)}>
+                    <Link to={`/edit/${book._id}`} className="bookEditButton">Edit</Link>
+                    <button onClick={() => handleDeleteBook(book._id)} className="bookEditButton">
                       Delete
                     </button>
                   </div>

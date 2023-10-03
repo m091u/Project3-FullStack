@@ -5,6 +5,9 @@ const express = require("express");
 // https://www.npmjs.com/package/morgan
 const logger = require("morgan");
 
+// https://www.npmjs.com/package/path
+const path = require("path");
+
 // ℹ️ Needed when we deal with cookies (we will when dealing with authentication)
 // https://www.npmjs.com/package/cookie-parser
 const cookieParser = require("cookie-parser");
@@ -19,12 +22,15 @@ module.exports = (app) => {
 
   app.use(
     cors({
-      origin: [process.env.CLIENT_URL]
+      origin: [process.env.CLIENT_URL],
     })
   );
 
   // In development environment the app logs
   app.use(logger("dev"));
+
+   // AHandles access to the public folder
+   app.use(express.static(path.join(__dirname, "..", "public")));
 
   // To have access to `body` property in the request
   app.use(express.json());

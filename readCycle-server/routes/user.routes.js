@@ -3,11 +3,12 @@ const router = express();
 const User = require("../models/User.model");
 const Book = require("../models/Book.model");
 const { isAuthenticated } = require("../middleware/jwt.middleware");
+const cloudinary = require('cloudinary').v2;
 
 // ********* require fileUploader in order to use it *********
 const fileUploader = require("../config/cloudinary.config");
 
-//render profile page  
+//render profile page
 router.get("/profile", isAuthenticated, (req, res) => {
   // Access user information
   const userId = req.payload._id;
@@ -35,33 +36,33 @@ router.get("/profile", (req, res, next) => {
     .catch((err) => res.json(err));
 });
 
-// POST "/api/upload" => Route that receives the image, sends it to Cloudinary via the fileUploader and returns the image URL
-router.post("/upload", fileUploader.single("avatar"), (req, res, next) => {
-  // console.log("file is: ", req.file)
- 
-  if (!req.file) {
-    next(new Error("No file uploaded!"));
-    return;
-  }
-  
-  // Get the URL of the uploaded file and send it as a response.
-  // 'fileUrl' can be any name, just make sure you remember to use the same when accessing it on the frontend
-  
-  res.json({ fileUrl: req.file.path });
+// Edit user profile
+router.get("/profile/user/edit/:id", isAuthenticated, (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+  User.findById(id).then((foundUser) => {
+    if (foundUser) {
+      const sentUser = foundUser._doc;
+      delete sentUser.password;
+      res.status(200).json(sentUser);
+    } else {
+      res.status(404).json({ error: "user not found" });
+    }
+  });
 });
 
-// Edit user profile
-router.post("/profile/edit", isAuthenticated, (req, res) => {
+router.put("/profile/user/edit/:id", isAuthenticated, (req, res) => {
   // Get the user's ID from the authenticated token
-  const userId = req.payload._id;
+  const { id } = req.params;
+  console.log(id, req.body);
 
   // Extract updated user profile data from the request body
   const { name, email, avatar, location } = req.body;
 
   // Find the user by their ID and update their profile data
   User.findByIdAndUpdate(
-    userId,
-    { name, email, avatar, location },
+    id,
+    { ...req.body },
     { new: true } // This option returns the updated user object
   )
     .then((updatedUser) => {
@@ -77,4 +78,19 @@ router.post("/profile/edit", isAuthenticated, (req, res) => {
     });
 });
 
+//image upload route
+// POST "/api/upload" => Route that receives the image, sends it to Cloudinary via the fileUploader and returns the image URL
+router.post("/upload", fileUploader.single("avatar"), (req, res, next) => {
+  // console.log("file is: ", req.file)
+
+  if (!req.file) {
+    next(new Error("No file uploaded!"));
+    return;
+  }
+
+  // Get the URL of the uploaded file and send it as a response.
+  // 'fileUrl' can be any name, just make sure you remember to use the same when accessing it on the frontend
+
+  res.json({ fileUrl: req.file.path });
+});
 module.exports = router;

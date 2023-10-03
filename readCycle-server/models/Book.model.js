@@ -32,7 +32,7 @@ const bookSchema = new Schema({
       "Science Fiction",
       "Self-Help",
       "Thriller",
-      "Travel"
+      "Travel",
     ],
   },
   description: String,
@@ -47,6 +47,10 @@ const bookSchema = new Schema({
   takenBy: {
     type: Schema.Types.ObjectId,
     ref: "User",
+  },
+  bookStatus: {
+    type: String,
+    enum: ["available", "pending", "shared"],
   },
   isDelivered: Boolean,
   booked: Boolean,

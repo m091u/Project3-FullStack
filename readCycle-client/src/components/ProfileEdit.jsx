@@ -1,67 +1,98 @@
-// EditProfileForm.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../context/auth.context";
 
-function ProfileEdit({ user, onUpdate }) {
-  const [formData, setFormData] = useState({
-    name: user?.name || "",
-    email: user?.email || "",
-    avatar: user?.avatar || "",
-    location: user?.location || "",
-  });
+const API_URL = "http://localhost:4005";
 
-  const API_URL = "http://localhost:4005";
+function ProfileEdit(props) {
+  const { user } = useContext(AuthContext);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [location, setLocation] = useState("");
+  const [avatar, setAvatar] = useState("");
+  const [avatarFile, setAvatarFile] = useState(null); // New state for the avatar file
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+  const navigate = useNavigate();
+  console.log(user._id);
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem("authToken");
+
+    // get user details from the server and populate form fields
+    axios
+      .get(`${API_URL}/api/profile/user/edit/${user._id}`, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
+      .then((response) => {
+        const userData = response.data;
+        setName(userData.name);
+        setEmail(userData.email);
+        setLocation(userData.location);
+        setAvatar(userData.avatar);
+      })
+      .catch((error) => console.log(error));
+  }, [user]);
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    const reqBody = { name, email, location, avatarFile };
+    for (let key in reqBody) {
+      if (!reqBody[key]) {
+        delete reqBody[key];
+      }
+    }
+    console.log(reqBody);
+    // Create a FormData object to send the form data to the server
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("location", location);
+    if (avatarFile) {
+      formData.append("avatar", avatarFile);
+    }
+
+    const storedToken = localStorage.getItem("authToken");
+    // Send a PUT request to update the user
+    axios
+      .put(`${API_URL}/api/profile/user/edit/${user._id}`, reqBody, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
+      .then((response) => {
+        navigate("/profile");
+      })
+      .catch((error) => console.log(error));
   };
 
   // ******** this method handles the file upload ********
   const handleFileUpload = (e) => {
-    // console.log("The file to be uploaded is: ", e.target.files[0]);
-
     const uploadData = new FormData();
-
-    // imageUrl => this name has to be the same as in the model since we pass
-    // req.body to .create() method when creating a new movie in '/api/movies' POST route
     uploadData.append("avatar", e.target.files[0]);
 
-    service
-      .uploadImage(uploadData)
+    const cloudinaryUploadPreset = "qq4m3xkd";
+
+    axios
+      .post(`https://api.cloudinary.com/v1_1/dejhw7aug/upload`, uploadData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        params: {
+          upload_preset: cloudinaryUploadPreset,
+        },
+      })
       .then((response) => {
-        // console.log("response is: ", response);
-        // response carries "fileUrl" which we can use to update the state
-        setImageUrl(response.fileUrl);
+        setAvatarFile(response.data.url); // Update avatarFile with the URL
       })
       .catch((err) => console.log("Error while uploading the file: ", err));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Send a POST request to update the user's profile
-    axios
-      .post(`${API_URL}/api/profile/edit`, formData)
-      .then((response) => {
-        console.log("Response from server:", response.data);
-        onUpdate(response.data); // Update the user data in the parent component
-      })
-      .catch((error) => {
-        console.error("Error updating profile:", error);
-      });
-  };
-
   return (
-    <form onSubmit={handleSubmit} className="profileEdit">
+    <form onSubmit={handleFormSubmit} className="profileEdit">
       <h3>Update your profile</h3>
       <label>
         Avatar:
-        <input
-          type="file"
-          name="avatar"
-          value={formData.avatar}
-          onChange={handleFileUpload}
-        />
+        <input type="file" name="avatar" onChange={handleFileUpload} />
       </label>
       <br></br>
       <label>
@@ -69,8 +100,8 @@ function ProfileEdit({ user, onUpdate }) {
         <input
           type="text"
           name="name"
-          value={formData.name}
-          onChange={handleInputChange}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
       </label>
       <br></br>
@@ -79,19 +110,35 @@ function ProfileEdit({ user, onUpdate }) {
         <input
           type="email"
           name="email"
-          value={formData.email}
-          onChange={handleInputChange}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
       </label>
       <br></br>
       <label>
         Location:
-        <input
-          type="text"
+        <select
           name="location"
-          value={formData.location}
-          onChange={handleInputChange}
-        />
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+        >
+          <option value="">Select Location</option>
+          <option value="Charlottenburg-Wilmersdorf">
+            Charlottenburg-Wilmersdorf
+          </option>
+          <option value="Friedrichshain-Kreuzberg">
+            Friedrichshain-Kreuzberg
+          </option>
+          <option value="Lichtenberg">Lichtenberg</option>
+          <option value="Mitte">Mitte</option>
+          <option value="Neukölln">Neukölln</option>
+          <option value="Pankow">Pankow</option>
+          <option value="Spandau">Spandau</option>
+          <option value="Reinickendorf">Reinickendorf</option>
+          <option value="Steglitz-Zehlendorf">Steglitz-Zehlendorf</option>
+          <option value="Tempelhof-Schöneberg">Tempelhof-Schöneberg</option>
+          <option value="Treptow-Köpenick">Treptow-Köpenick</option>
+        </select>
       </label>
       <br></br>
       <button type="submit">Save Changes</button>

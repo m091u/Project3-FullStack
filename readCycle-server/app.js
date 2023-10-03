@@ -16,9 +16,15 @@ const app = express();
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
 require("./config")(app);
 
+//initialize Nodemailer
+const nodemailer = require("nodemailer");
+
 // 👇 Start handling routes here
 const indexRoutes = require("./routes/index.routes");
 app.use("/api", indexRoutes);
+
+const authRouter = require("./routes/auth.routes");
+app.use("/auth", authRouter);
 
 const libraryRouter = require("./routes/library.routes");
 app.use("/api", isAuthenticated, libraryRouter);
@@ -27,10 +33,7 @@ const bookRoutes = require("./routes/book.routes");
 app.use("/api", isAuthenticated, bookRoutes);
 
 const userRoutes = require("./routes/user.routes");
-app.use("/api", userRoutes);
-
-const authRouter = require("./routes/auth.routes");
-app.use("/auth", authRouter);
+app.use("/api", isAuthenticated, userRoutes);
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);

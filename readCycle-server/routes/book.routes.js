@@ -74,7 +74,7 @@ router.put("/profile/edit/:bookId", isAuthenticated, (req, res) => {
 });
 
 //Request a book
-router.post('/requests', (req, res) => {
+router.post('/requests', isAuthenticated,(req, res) => {
   const { bookId } = req.body;
   const requesterId = req.payload._id; 
 

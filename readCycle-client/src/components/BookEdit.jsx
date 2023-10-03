@@ -79,7 +79,7 @@ function BookEdit(props) {
   };
 
   return (
-    <div className="BookEditPage">
+    <div className="bookEditPage">
       <p className="editBookTitle">Edit Book</p>
 
       <form onSubmit={handleFormSubmit}>
@@ -117,7 +117,7 @@ function BookEdit(props) {
         <div class="form-group">
           <label htmlFor="genre">Genre: </label>
           <select
-            id="genre"
+            id="genreEdit"
             type="text"
             name="genre"
             value={genre}

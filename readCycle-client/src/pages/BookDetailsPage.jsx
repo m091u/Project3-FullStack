@@ -11,13 +11,9 @@ function BookDetailsPage(props) {
   const [book, setBook] = useState(null);
   const { bookId } = useParams();
 
-  // console.log(user);
-
   const getBook = () => {
     // Get the token from the localStorage
     const storedToken = localStorage.getItem("authToken");
-
-    // Send the token through the request "Authorization" Headers
 
     axios
       .get(`${API_URL}/api/library/${bookId}`, {
@@ -35,6 +31,30 @@ function BookDetailsPage(props) {
     getBook();
   }, []);
 
+  const handleRequestBook = () => {
+    const storedToken = localStorage.getItem("authToken");
+    // Send a request to the server to request the book
+    axios
+      .post(
+        `${API_URL}/api/requests`,
+        { bookId }, // This is the request body
+        {
+          headers: {
+            Authorization: `Bearer ${storedToken}`,
+          },
+        }
+      )
+      .then(() => {
+        // Handle success, e.g., show a confirmation message
+        alert("Request sent successfully");
+      })
+      .catch((error) => {
+        // Handle errors, e.g., show an error message
+        console.error("Error requesting the book:", error);
+        alert("Failed to send request");
+      });
+  };
+
   return (
     <>
       <div className="bookDetails">
@@ -49,7 +69,9 @@ function BookDetailsPage(props) {
             </div>
             <div className="bookInfo">
               <h2>{book.title}</h2>
-              <p>by <strong>{book.author}</strong></p>
+              <p>
+                by <strong>{book.author}</strong>
+              </p>
               <p>
                 <strong>Genre: </strong>
                 {book.genre}
@@ -77,7 +99,7 @@ function BookDetailsPage(props) {
         </Link>
 
         <Link to="">
-          <button>Request Book</button>
+          <button onClick={handleRequestBook}>Request Book</button>
         </Link>
       </div>
     </>

@@ -11,6 +11,7 @@ function AboutPage() {
           <p>
             Sharing Stories, One Book at a Time <br></br>  Dive into the Book Sharing
             Experience
+        
           </p>
           
           <p>
