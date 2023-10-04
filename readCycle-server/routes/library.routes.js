@@ -72,7 +72,6 @@ router.get("/library/:bookId", (req, res, next) => {
         res.status(404).json({ message: "Book not found" });
         return;
       }
-
       // Log the book data here
       console.log("Book Data:", book);
 

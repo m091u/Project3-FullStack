@@ -31,29 +31,26 @@ function BookDetailsPage(props) {
     getBook();
   }, []);
 
-  const handleRequestBook = () => {
-    const storedToken = localStorage.getItem("authToken");
-    // Send a request to the server to request the book
-    axios
-      .post(
-        `${API_URL}/api/requests`,
-        { bookId }, // This is the request body
-        {
-          headers: {
-            Authorization: `Bearer ${storedToken}`,
-          },
-        }
-      )
-      .then(() => {
-        // Handle success, e.g., show a confirmation message
-        alert("Request sent successfully");
-      })
-      .catch((error) => {
-        // Handle errors, e.g., show an error message
-        console.error("Error requesting the book:", error);
-        alert("Failed to send request");
-      });
-  };
+  // const handleRequestBook = () => {
+  //   const storedToken = localStorage.getItem("authToken");
+  //   axios
+  //     .post(
+  //       `${API_URL}/api/requests`,
+  //       { bookId }, 
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${storedToken}`,
+  //         },
+  //       }
+  //     )
+  //     .then(() => {
+  //       alert("Request sent successfully");
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error requesting the book:", error);
+  //       alert("Failed to send request");
+  //     });
+  // };
 
   return (
     <>
@@ -86,8 +83,8 @@ function BookDetailsPage(props) {
                 <strong>Owner review: </strong> {book.review}
               </p>
               <p className="bookOwner">
-                <strong>Book Owner: </strong>
-                <a href={`/profile/`}>{book.offeredBy.name}</a>
+                <strong>Book Owner: {book.offeredBy.name} </strong>
+                {/* <a href={`/profile/`}>{book.offeredBy.name}</a> */}
               </p>
             </div>
           </>
@@ -99,7 +96,8 @@ function BookDetailsPage(props) {
         </Link>
 
         <Link to="">
-          <button onClick={handleRequestBook}>Request Book</button>
+          <button >Contact Book Owner</button> 
+          {/* onClick={handleRequestBook} */}
         </Link>
       </div>
     </>

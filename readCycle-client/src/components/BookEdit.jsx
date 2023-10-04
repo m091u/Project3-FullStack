@@ -80,7 +80,7 @@ function BookEdit(props) {
 
   return (
     <div className="bookEditPage">
-      <p className="editBookTitle">Edit Book</p>
+      <p className="editTitle">Edit Book</p>
 
       <form onSubmit={handleFormSubmit}>
         <div class="form-group">
@@ -173,7 +173,7 @@ function BookEdit(props) {
             onChange={(e) => setReview(e.target.value)}
           />
         </div>
-        <button type="submit">Update Book</button>
+        <button className="form-button" type="submit">Update Book</button>
       </form>
     </div>
   );

@@ -51,13 +51,21 @@ router.get("/profile/user/edit/:id", isAuthenticated, (req, res) => {
   });
 });
 
-router.put("/profile/user/edit/:id", isAuthenticated, (req, res) => {
+router.put("/profile/user/edit/:id", isAuthenticated, fileUploader.single('avatar'),(req, res) => {
   // Get the user's ID from the authenticated token
   const { id } = req.params;
   console.log(id, req.body);
 
   // Extract updated user profile data from the request body
   const { name, email, avatar, location } = req.body;
+
+  //updating avatar image
+  let newAvatar;
+  if(req.file) {
+    newAvatar = req.file.path;
+  } else {
+    newAvatar = avatar;
+  }
 
   // Find the user by their ID and update their profile data
   User.findByIdAndUpdate(
@@ -78,19 +86,4 @@ router.put("/profile/user/edit/:id", isAuthenticated, (req, res) => {
     });
 });
 
-//image upload route
-// POST "/api/upload" => Route that receives the image, sends it to Cloudinary via the fileUploader and returns the image URL
-router.post("/upload", fileUploader.single("avatar"), (req, res, next) => {
-  // console.log("file is: ", req.file)
-
-  if (!req.file) {
-    next(new Error("No file uploaded!"));
-    return;
-  }
-
-  // Get the URL of the uploaded file and send it as a response.
-  // 'fileUrl' can be any name, just make sure you remember to use the same when accessing it on the frontend
-
-  res.json({ fileUrl: req.file.path });
-});
 module.exports = router;

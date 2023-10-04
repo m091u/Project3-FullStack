@@ -59,10 +59,18 @@ function ProfilePage() {
     <div className="profile-container">
       {user ? (
         <div className="user-details">
-          <img  className="userAvatar" src={user.user.avatar} width="200px" alt="avatar" />
-          <p className="userName">
-            <strong>{user.user.name}</strong>
-          </p>
+          <div className="user-avatar">
+            <img
+              className="userAvatar"
+              src={user.user.avatar}
+              width="200px"
+              alt="avatar"
+            />
+            <p className="userName">
+              <strong>{user.user.name}</strong>
+            </p>
+          </div>
+
           <ul className="profile-list">
             <li>
               <p className="challenge">Reading challenge</p>
@@ -89,24 +97,24 @@ function ProfilePage() {
           <p>
             <strong>Books Offered</strong>
           </p>
-          <p>Avaialble to share</p>
+          <p>Avaialble for sharing</p>
           {user ? (
             <ul className="booksShared">
               {user.userOfferedBooks.map((book, index) => (
                 <li key={index} className="profileBooks">
-                  <img
-                    src={book.coverImageUrl}
-                    alt="book cover"
-                    width="150"
-                    height="150"
-                  />
+                  <img src={book.coverImage} alt="book cover" width="190" />
                   <div>
                     <strong>Title:</strong> {book.title}
                     <br />
                     <strong>Author:</strong> {book.author}
                     <br />
-                    <Link to={`/edit/${book._id}`} className="bookEditButton">Edit</Link>
-                    <button onClick={() => handleDeleteBook(book._id)} className="bookEditButton">
+                    <Link to={`/edit/${book._id}`} className="bookEditButton">
+                      Edit
+                    </Link>
+                    <button
+                      onClick={() => handleDeleteBook(book._id)}
+                      className="bookEditButton"
+                    >
                       Delete
                     </button>
                   </div>

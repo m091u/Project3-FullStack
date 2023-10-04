@@ -23,7 +23,9 @@ const userSchema = new Schema({
   },
   avatar: {
     type: String,
-    default: "/images/avatar1.png",
+    default:
+      "https://res.cloudinary.com/dejhw7aug/image/upload/v1696346771/readCycle-gallery/avatar1_cjxa2p.png",
+    // "/images/avatar1.png",
     // "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png",
   },
   booksOffered: [{ type: Schema.Types.ObjectId, ref: "Book" }],

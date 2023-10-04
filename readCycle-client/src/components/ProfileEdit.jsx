@@ -12,7 +12,7 @@ function ProfileEdit(props) {
   const [email, setEmail] = useState("");
   const [location, setLocation] = useState("");
   const [avatar, setAvatar] = useState("");
-  const [avatarFile, setAvatarFile] = useState(null); // New state for the avatar file
+  // const [avatarFile, setAvatarFile] = useState(null); // New state for the avatar file
 
   const navigate = useNavigate();
   console.log(user._id);
@@ -37,7 +37,7 @@ function ProfileEdit(props) {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    const reqBody = { name, email, location, avatarFile };
+    const reqBody = { name, email, location, avatar };
     for (let key in reqBody) {
       if (!reqBody[key]) {
         delete reqBody[key];
@@ -49,8 +49,8 @@ function ProfileEdit(props) {
     formData.append("name", name);
     formData.append("email", email);
     formData.append("location", location);
-    if (avatarFile) {
-      formData.append("avatar", avatarFile);
+    if (avatar) {
+      formData.append("avatar", avatar);
     }
 
     const storedToken = localStorage.getItem("authToken");
@@ -70,54 +70,69 @@ function ProfileEdit(props) {
     const uploadData = new FormData();
     uploadData.append("avatar", e.target.files[0]);
 
-    const cloudinaryUploadPreset = "qq4m3xkd";
+    const cloudinaryUploadPreset = process.env.CLOUDINARY_UPLOAD_PRESET;
 
     axios
-      .post(`https://api.cloudinary.com/v1_1/dejhw7aug/upload`, uploadData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-        params: {
-          upload_preset: cloudinaryUploadPreset,
-        },
-      })
+      .put(
+        `https://api.cloudinary.com/v1_1${process.env.CLOUDINARY_NAME}/image/upload`,
+        uploadData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          params: {
+            upload_preset: cloudinaryUploadPreset,
+          },
+        }
+      )
       .then((response) => {
-        setAvatarFile(response.data.url); // Update avatarFile with the URL
+        setAvatar(response.data.url); // Update avatarFile with the URL
       })
       .catch((err) => console.log("Error while uploading the file: ", err));
   };
 
   return (
-    <form onSubmit={handleFormSubmit} className="profileEdit">
-      <h3>Update your profile</h3>
-      <label>
-        Avatar:
-        <input type="file" name="avatar" onChange={handleFileUpload} />
-      </label>
+    <form
+      onSubmit={handleFormSubmit}
+      enctype="multipart/form-data"
+      className="profileEdit"
+    >
+      <p className="editTitle">Update your profile</p>
+      <div class="form-group">
+        <label>Avatar:</label>
+        <input
+          type="file"
+          name="avatar"
+          onChange={handleFileUpload}
+          className="userAvatar"
+        />
+      </div>
       <br></br>
-      <label>
-        Name:
+      <div class="form-group">
+        <label>Name: </label>
         <input
           type="text"
           name="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
-      </label>
+      </div>
       <br></br>
-      <label>
-        Email:
+      <div class="form-group">
+        <label>Email:</label>
         <input
           type="email"
           name="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-      </label>
+      </div>
       <br></br>
-      <label>
-        Location:
+      <div class="form-group">
+        <label>Location:</label>
         <select
+          id="location"
+          type="text"
           name="location"
           value={location}
           onChange={(e) => setLocation(e.target.value)}
@@ -139,9 +154,9 @@ function ProfileEdit(props) {
           <option value="Tempelhof-Schöneberg">Tempelhof-Schöneberg</option>
           <option value="Treptow-Köpenick">Treptow-Köpenick</option>
         </select>
-      </label>
+      </div>
       <br></br>
-      <button type="submit">Save Changes</button>
+      <button type="submit" className="form-button">Save Changes</button>
     </form>
   );
 }

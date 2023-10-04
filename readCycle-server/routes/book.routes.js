@@ -5,9 +5,15 @@ const Book = require("../models/Book.model");
 const { isAuthenticated } = require("../middleware/jwt.middleware");
 
 //  GET  -  filter books by genre
-router.get("/filter", (req, res, next) => {
+router.get("/filter", isAuthenticated, (req, res, next) => {
   const { bookGenre } = req.query;
-  Book.find({ genre: { $regex: new RegExp(bookGenre, "i") } })
+
+  const userId = req.payload._id;
+
+  Book.find({
+    genre: { $regex: new RegExp(bookGenre, "i") },
+    offeredBy: { $ne: userId }, // Exclude books owned by the authenticated user
+  })
     .then((foundBooks) => res.json(foundBooks))
     .catch((error) => next(error));
 });
@@ -73,7 +79,7 @@ router.put("/profile/edit/:bookId", isAuthenticated, (req, res) => {
     });
 });
 
-//Request a book
+//Request a book NOT USED
 router.post('/requests', isAuthenticated,(req, res) => {
   const { bookId } = req.body;
   const requesterId = req.payload._id; 

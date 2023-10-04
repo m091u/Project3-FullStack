@@ -146,8 +146,7 @@ textarea {
 
 .Signup button,
 .Login button,
-.AddBookPage button,
-.BookEditPage button {
+.AddBookPage button {
   padding: 10px;
   border: none;
   background-color: #83866d;
@@ -159,23 +158,20 @@ textarea {
   font-size: 1em;
 }
 
-.AddBookPage {
+.BookEditPage button {
+  width: 100px;
+}
+
+.AddBookPage,
+.bookEditPage,
+.profileEdit {
   background-image: url(./assets/book.png);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   padding-left: 20px;
   min-height: 100vh;
-}
-
-.bookEditPage {
-  background-image: url(./assets/book.png);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  padding-left: 25px;
-  /* height: 90vh;  */
-  overflow: auto;
+  padding-top: 20px;
 }
 
 .form-group {
@@ -188,10 +184,13 @@ textarea {
 }
 
 .form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="file"],
 .form-group textarea,
 .form-group select,
+#location,
 #genreEdit {
-  width: 60%;
+  width: 50%;
   padding: 7px;
   border: 1px solid #ccc;
   border-radius: 6px;
@@ -203,10 +202,10 @@ textarea {
   font-size: 1.6em;
   padding: 20px 0 20px 0;
 }
-.editBookTitle {
+.editTitle {
   margin: 0px !important;
   color: rgb(34, 33, 32);
-  font-size: 1.6em;
+  font-size: 1.5em;
   font-weight: bold;
   padding: 20px 0 20px 0;
 }
@@ -219,11 +218,11 @@ textarea {
 .libraryPage {
   margin: 30px 30px 90px 20px;
 }
-.booksContainer {
+/* .booksContainer {
   display: inline;
   min-height: 267px;
   text-align: center;
-}
+} */
 
 .libraryHeader {
   background-image: url(../src/assets/library-default.jpg);
@@ -323,7 +322,20 @@ textarea {
   grid-template-columns: repeat(auto-fill, minmax(205px, 1fr));
 }
 
-.bookContainer,
+.bookContainer {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: aliceblue;
+  box-shadow: 0 4px 6px #0000001a;
+  transition: box-shadow 0.6s ease-in-out;
+
+  /* Add a media query for smaller screens */
+  @media (max-width: 768px) {
+    /* Change the number of columns to adjust for smaller screens */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+}
 .profileBooks {
   border: 1px solid #ddd;
   border-radius: 5px;
@@ -350,7 +362,6 @@ textarea {
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  transition: background-color 0.3s ease; /* Smooth hover effect */
   margin: 10px 10px 30px;
   min-width: 200px;
 }
@@ -404,13 +415,12 @@ textarea {
 }
 .user-details {
   padding: 20px;
-  height: 85vh;
+  height: 100vh;
   background-color: #f6f2f2;
 }
 .profile-list {
   list-style: none;
   padding: 0;
-  /* flex-shrink: 1; */
 }
 .profile-list li {
   margin: 40px 0 40px 0;
@@ -423,9 +433,7 @@ textarea {
   padding: 10px;
   list-style: none;
 }
-.booksShared {
-  display: flex;
-}
+
 .userName {
   font-size: 1.5em;
 }
@@ -433,17 +441,7 @@ textarea {
   border-radius: 10px;
 }
 .add-button,
-.edit-button {
-  padding: 5px 10px;
-  background-color: #83866d;
-  color: #fff;
-  text-decoration: none;
-  font-size: 16px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease; /* Smooth hover effect */
-}
+.edit-button,
 .challenge {
   padding: 5px 10px;
   background-color: #83866d;
@@ -453,22 +451,15 @@ textarea {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease; /* Smooth hover effect */
   max-width: 160px;
+  transition: background-color 0.3s ease;
+}
+
+.user-avatar {
+  padding: 20px;
 }
 
 /* CSS for profile edit */
-.profileEdit {
-  background-image: url(./assets/book.png);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  padding-left: 40px;
-  padding-top: 20px;
-  min-height: 100vh;
-  /* width: 400px; */
-  margin: 0;
-}
 .profileEdit input,
 .profileEdit select {
   padding: 7px;
@@ -484,18 +475,21 @@ textarea {
   font-weight: bold;
   display: block;
 }
-.bookEditButton {
-  background-color: #e7e7e7; /* Green */
+.bookEditButton, .form-button {
+  background-color: #e7e7e7;
   border: 2px solid gray;
   color: rgb(13, 13, 13);
   padding: 5px 10px;
-  margin-left: 10px;
   margin-top: 10px;
   min-width: 70px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+}
+/* Add margin to create space between buttons */
+.bookEditButton + .bookEditButton {
+  margin-left: 10px;
 }
 
 /* CSS for the Footer Component */

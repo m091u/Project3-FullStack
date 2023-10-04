@@ -15,7 +15,7 @@ function HomePage() {
         <p>
           {/* <strong> */}
             Pass the Joy of Reading On <br></br>Your Hub for Book Swaps and
-            Shared Adventures.
+            Shared Adventures
           {/* </strong> */}
         </p>
 
