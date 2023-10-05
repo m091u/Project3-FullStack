@@ -8,7 +8,6 @@ function HomePage() {
         <div className="logo-and-text">
           <h1>
             readCycle
-            {/* <img src={logo} alt="logo" style={{ width: "100px" }} /> */}
           </h1>
         </div>
 

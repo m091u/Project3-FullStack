@@ -9,9 +9,21 @@ function ProfilePage() {
   const [userOfferedBooks, setUserOfferedBooks] = useState([]);
   const { bookId } = useParams();
   const [needsReloads, setNeedsReloads] = useState(true);
+  const [booksOfferedScore, setBooksOfferedScore] = useState(0);
 
   const API_URL = "http://localhost:4005";
   const navigate = useNavigate();
+
+  //gamify
+  const getUserBadge = (booksOfferedScore) => {
+    if (booksOfferedScore >= 0 && booksOfferedScore <= 5) {
+      return "readCycle Novice";
+    } else if (booksOfferedScore >= 6 && booksOfferedScore <= 10) {
+      return "readCycle Rockstar";
+    } else if (booksOfferedScore > 10) {
+      return "readCycle Master";
+    }
+  };
 
   useEffect(() => {
     if (needsReloads) {
@@ -73,17 +85,26 @@ function ProfilePage() {
 
           <ul className="profile-list">
             <li>
+              <p className="challenge">Books Offered</p>
+              <p className="books-count">
+                <strong>{user.user.booksOfferedScore} Books</strong>
+              </p>
+              <p className="books-count">
+                <strong>{getUserBadge(booksOfferedScore)}</strong>
+              </p>
+            </li>
+            <li>
               <p className="challenge">Reading challenge</p>
               <button disabled>
                 Choose how many books you will read this year
               </button>
             </li>
-            <li>
+            <li className="challenge">
               <Link to="/add-book" className="add-button">
                 Add Your Dog-Eared Book
               </Link>
             </li>
-            <li>
+            <li className="challenge">
               <Link to="/profile/edit" className="edit-button">
                 Settings
               </Link>
@@ -96,28 +117,28 @@ function ProfilePage() {
 
       <div className="book-details">
         {/* <div> */}
-          <div>
-            <h2>
-              <strong>Books Offered</strong>
-            </h2>
-            <h3>
+        <div>
+          <h2>
+            <strong>Books Offered</strong>
+          </h2>
+          <h3>
             <strong> Avaialble for sharing</strong>
-            </h3>
-            <div >
-              {user ? (
-                <div className="booksShared">
-                  {user.userOfferedBooks
-                    .filter((book) => book.booked !== true)
-                    .map((book, index) => (
-                      <div className="bookShared">
-                      <div key={index} className="profileBook" >
+          </h3>
+          <div>
+            {user ? (
+              <div className="booksShared">
+                {user.userOfferedBooks
+                  .filter((book) => book.booked !== true)
+                  .map((book, index) => (
+                    <div className="bookShared">
+                      <div key={index} className="profileBook">
                         <img
                           src={book.coverImage}
                           alt="book cover"
-                          width="190"
                           className="bookCover"
-                        />
-                        <strong>Title:</strong> {book.title}  <br></br>
+                        />{" "}
+                        <br></br>
+                        <strong>Title:</strong> {book.title} <br></br>
                         <strong>Author:</strong> {book.author} <br></br>
                         <Link
                           to={`/edit/${book._id}`}
@@ -131,35 +152,37 @@ function ProfilePage() {
                         >
                           Delete
                         </button>
-                      </div> <br></br>
-                      </div>
-                    ))}
-                </div>
-              ) : (
-                <p>Loading...</p>
-              )}
-            </div>
+                      </div>{" "}
+                      <br></br>
+                    </div>
+                  ))}
+              </div>
+            ) : (
+              <p>Loading...</p>
+            )}
           </div>
-          <hr></hr>
-          <div>
-            <h3>
-              <strong>Pending Share Requests</strong>
-            </h3>
+        </div>
+        <hr></hr>
+        <div>
+          <h3>
+            <strong>Pending Share Requests</strong>
+          </h3>
 
-            <div >
-              <div className="booksShared">
-                {user ? (
-                  user.userOfferedBooks
-                    .filter((book) => book.booked === true) // Filter books with booked property equal to true
-                    .map((book, index) => (
-                      <div className="bookShared">
+          <div>
+            <div className="booksShared">
+              {user ? (
+                user.userOfferedBooks
+                  .filter((book) => book.booked === true) // Filter books with booked property equal to true
+                  .map((book, index) => (
+                    <div className="bookShared">
                       <div key={index} className="profileBook">
                         <img
                           src={book.coverImage}
                           alt="book cover"
                           width="180"
                           className="bookCover"
-                        />
+                        />{" "}
+                        <br></br>
                         <strong>Title:</strong> {book.title}
                         <br />
                         <strong>Author:</strong> {book.author}
@@ -176,15 +199,16 @@ function ProfilePage() {
                         >
                           Delete
                         </button>
-                        </div> <br></br>
-                      </div>
-                    ))
-                ) : (
-                  <p>Loading...</p>
-                )}
-              </div>
+                      </div>{" "}
+                      <br></br>
+                    </div>
+                  ))
+              ) : (
+                <p>Loading...</p>
+              )}
             </div>
           </div>
+        </div>
         {/* </div> */}
       </div>
     </div>

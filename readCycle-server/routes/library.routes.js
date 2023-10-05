@@ -25,7 +25,7 @@ router.post("/library", (req, res) => {
     takenBy: null,
     isDelivered: false,
     booked: false,
-    booksOfferedScore:0
+    booksOfferedScore: 0,
   })
     .then((book) => {
       // Add the newly created book to booksOffered
@@ -40,11 +40,21 @@ router.post("/library", (req, res) => {
               cover: book.coverImage,
             },
           },
-          // Increment the book count
-          $inc: { booksOfferedScore: 1 },
         },
         { new: true } // Return the updated user document
       );
+    })
+    .then((user) => {
+      if (!user) {
+        // Handle case where user document is not found
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      // increment the booksOfferedScore field
+      user.booksOfferedScore += 1;
+
+      // Save the updated user document
+      return user.save();
     })
     .then(() => {
       res.status(201).json({ message: "Book created successfully" });

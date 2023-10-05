@@ -23,9 +23,9 @@ function AboutPage() {
           <div className="aboutBox">
             <h3>How it works?</h3>
             <p>
-              Getting started is a breeze! <br></br> Simply add the books you're
+              Getting started is a breeze! <br></br> Simply <strong>add the books</strong> you're
               willing to exchange to our platform. <br></br> When you spot a
-              book you'd love to read, just let the owner know, and you can kick
+              book you'd love to read, just <strong>contact the owner</strong> , and you can kick
               off a friendly chat to arrange the exchange details. <br></br>{" "}
               It's all about connecting with fellow bookworms and sharing the
               joy of reading!

@@ -66,32 +66,6 @@ function ProfileEdit(props) {
       .catch((error) => console.log(error));
   };
 
-  // // ******** this method handles the file upload ********
-  // const handleFileUpload = (e) => {
-  //   const uploadData = new FormData();
-  //   uploadData.append("avatar", e.target.files[0]);
-
-  //   const cloudinaryUploadPreset = process.env.CLOUDINARY_UPLOAD_PRESET;
-
-  //   axios
-  //     .put(
-  //       `https://api.cloudinary.com/v1_1${process.env.CLOUDINARY_NAME}/image/upload`,
-  //       uploadData,
-  //       {
-  //         headers: {
-  //           "Content-Type": "multipart/form-data",
-  //         },
-  //         params: {
-  //           upload_preset: cloudinaryUploadPreset,
-  //         },
-  //       }
-  //     )
-  //     .then((response) => {
-  //       setAvatar(response.data.url); // Update avatarFile with the URL
-  //     })
-  //     .catch((err) => console.log("Error while uploading the file: ", err));
-  // };
-
   return (
     <form
       onSubmit={handleFormSubmit}
@@ -105,7 +79,7 @@ function ProfileEdit(props) {
           type="file"
           name="avatar"
           // onChange={handleFileUpload}
-          className="userAvatar"
+          className="user-avatar"
         />
       </div>
       <br></br>

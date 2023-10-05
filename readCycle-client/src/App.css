@@ -2,7 +2,14 @@ body,
 html {
   margin: 0;
   padding: 0;
+  height: 100%;
   font-family: "Roboto", sans-serif;
+}
+body {
+  /* padding-bottom: 60px; */
+  min-height: 100vh; /* Ensures a minimum height of the viewport */
+  display: flex;
+  flex-direction: column;
 }
 
 *,
@@ -49,7 +56,7 @@ html {
   background-size: 50%;
   width: 100%;
   height: 100%;
-  border-radius: 6px;
+  border-radius: 7px;
   z-index: 2;
   overflow: hidden;
 }
@@ -217,7 +224,9 @@ textarea {
 }
 
 .libraryPage {
-  margin: 30px 30px 90px 20px;
+  margin: 30px 30px 90px 30px;
+  min-height: 100%;
+  /* height: 100vh; */
 }
 
 .libraryHeader {
@@ -230,7 +239,7 @@ textarea {
 }
 
 .headerText {
-  color: #784a89;
+  color: #1f1e1f;
   font-size: 1.6em;
 }
 
@@ -318,14 +327,14 @@ textarea {
   display: grid;
   grid-gap: 25px;
   padding: 0;
-  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
 }
 
 .bookContainer,
 .bookShared {
   border: 1px solid #ddd;
   border-radius: 5px;
-  padding: 10px;
+  padding: 5px;
   background-color: aliceblue;
   box-shadow: 0 4px 6px #0000001a;
   transition: box-shadow 0.6s ease-in-out;
@@ -355,7 +364,7 @@ textarea {
 
 .link-button:hover,
 .category-select:hover {
-  background-color: #3f5439;
+  background-color: #848383;
 }
 
 /* CSS for book details page */
@@ -393,7 +402,7 @@ textarea {
 }
 
 .bookButtons button:hover {
-  background-color: #3f5439;
+  background-color: #848383;
 }
 
 .bookDetailCover img {
@@ -403,7 +412,7 @@ textarea {
   margin: 20px 20px;
   border: 2px solid #777;
   max-width: 400px;
-  background-color: #83866d;
+  background-color: #555;
   color: aliceblue;
   text-align: center;
   font-size: 1.1em;
@@ -415,13 +424,12 @@ textarea {
 .profile-container {
   display: flex;
   justify-content: space-evenly;
-  /* padding-bottom: 70px; */
+  padding-bottom: 70px;
 }
 .book-details {
   padding: 10px 20px 15px 30px;
   display: grid;
   flex-grow: 4;
-  /* flex-direction: column; */
 }
 
 .user-details {
@@ -438,9 +446,14 @@ textarea {
 
 .userName {
   font-size: 1.5em;
+  text-align: center;
 }
 .userAvatar {
   border-radius: 10px;
+  /* padding-left: 10px; */
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 .add-button,
 .edit-button,
@@ -448,15 +461,22 @@ textarea {
   padding: 5px 10px;
   background-color: #555;
   color: #fff;
-  text-decoration: none;
   font-size: 16px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  max-width: 160px;
+  min-width: 160px;
   transition: background-color 0.3s ease;
+  text-align: center;
 }
-
+.add-button,
+.edit-button {
+  text-decoration: none;
+}
+.books-count {
+  text-align: center;
+  color: #6c676e;
+}
 .user-avatar {
   padding: 20px;
 }
@@ -504,10 +524,10 @@ textarea {
   background-color: #555;
   color: aliceblue;
   padding: 20px 20px;
-  /* position: fixed; */
-  bottom: 0;
+  position: fixed;
   width: 100%;
-  margin: 0;
+  bottom: 0;
+  /* height: 60px; */
 }
 
 .social-links {
