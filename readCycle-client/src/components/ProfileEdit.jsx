@@ -11,7 +11,6 @@ function ProfileEdit(props) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [location, setLocation] = useState("");
-  const [avatar, setAvatar] = useState("");
   // const [avatarFile, setAvatarFile] = useState(null); // New state for the avatar file
 
   const navigate = useNavigate();
@@ -37,13 +36,15 @@ function ProfileEdit(props) {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    const reqBody = { name, email, location, avatar };
-    for (let key in reqBody) {
-      if (!reqBody[key]) {
-        delete reqBody[key];
-      }
-    }
-    console.log(reqBody);
+    const avatar = e.target.avatar.files[0];
+    console.log(avatar);
+    // const reqBody = { name, email, location, avatar };
+    // for (let key in reqBody) {
+    //   if (!reqBody[key]) {
+    //     delete reqBody[key];
+    //   }
+    // }
+    // console.log(reqBody);
     // Create a FormData object to send the form data to the server
     const formData = new FormData();
     formData.append("name", name);
@@ -56,7 +57,7 @@ function ProfileEdit(props) {
     const storedToken = localStorage.getItem("authToken");
     // Send a PUT request to update the user
     axios
-      .put(`${API_URL}/api/profile/user/edit/${user._id}`, reqBody, {
+      .put(`${API_URL}/api/profile/user/edit/${user._id}`, formData, {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
@@ -65,31 +66,31 @@ function ProfileEdit(props) {
       .catch((error) => console.log(error));
   };
 
-  // ******** this method handles the file upload ********
-  const handleFileUpload = (e) => {
-    const uploadData = new FormData();
-    uploadData.append("avatar", e.target.files[0]);
+  // // ******** this method handles the file upload ********
+  // const handleFileUpload = (e) => {
+  //   const uploadData = new FormData();
+  //   uploadData.append("avatar", e.target.files[0]);
 
-    const cloudinaryUploadPreset = process.env.CLOUDINARY_UPLOAD_PRESET;
+  //   const cloudinaryUploadPreset = process.env.CLOUDINARY_UPLOAD_PRESET;
 
-    axios
-      .put(
-        `https://api.cloudinary.com/v1_1${process.env.CLOUDINARY_NAME}/image/upload`,
-        uploadData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-          params: {
-            upload_preset: cloudinaryUploadPreset,
-          },
-        }
-      )
-      .then((response) => {
-        setAvatar(response.data.url); // Update avatarFile with the URL
-      })
-      .catch((err) => console.log("Error while uploading the file: ", err));
-  };
+  //   axios
+  //     .put(
+  //       `https://api.cloudinary.com/v1_1${process.env.CLOUDINARY_NAME}/image/upload`,
+  //       uploadData,
+  //       {
+  //         headers: {
+  //           "Content-Type": "multipart/form-data",
+  //         },
+  //         params: {
+  //           upload_preset: cloudinaryUploadPreset,
+  //         },
+  //       }
+  //     )
+  //     .then((response) => {
+  //       setAvatar(response.data.url); // Update avatarFile with the URL
+  //     })
+  //     .catch((err) => console.log("Error while uploading the file: ", err));
+  // };
 
   return (
     <form
@@ -103,7 +104,7 @@ function ProfileEdit(props) {
         <input
           type="file"
           name="avatar"
-          onChange={handleFileUpload}
+          // onChange={handleFileUpload}
           className="userAvatar"
         />
       </div>
@@ -156,7 +157,9 @@ function ProfileEdit(props) {
         </select>
       </div>
       <br></br>
-      <button type="submit" className="form-button">Save Changes</button>
+      <button type="submit" className="form-button">
+        Save Changes
+      </button>
     </form>
   );
 }

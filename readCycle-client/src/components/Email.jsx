@@ -10,6 +10,7 @@ function EmailSender() {
   const sendEmail = () => {
     const emailData = {
       to: recipientEmail,
+      cc: requesterEmail,
       subject: subject,
       text: message,
     };
@@ -18,11 +19,9 @@ function EmailSender() {
     axios.post("/api/send-email", emailData)
       .then((response) => {
         console.log("Email sent successfully!", response.data);
-        // You can handle success as needed, e.g., show a confirmation message.
       })
       .catch((error) => {
         console.error("Error sending email:", error);
-        // Handle errors, e.g., show an error message to the user.
       });
   };
 

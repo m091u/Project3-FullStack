@@ -145,8 +145,7 @@ textarea {
 }
 
 .Signup button,
-.Login button,
-.AddBookPage button {
+.Login button {
   padding: 10px;
   border: none;
   background-color: #83866d;
@@ -172,6 +171,8 @@ textarea {
   padding-left: 20px;
   min-height: 100vh;
   padding-top: 20px;
+  padding-bottom: 90px;
+  overflow: scroll;
 }
 
 .form-group {
@@ -218,11 +219,6 @@ textarea {
 .libraryPage {
   margin: 30px 30px 90px 20px;
 }
-/* .booksContainer {
-  display: inline;
-  min-height: 267px;
-  text-align: center;
-} */
 
 .libraryHeader {
   background-image: url(../src/assets/library-default.jpg);
@@ -243,7 +239,9 @@ textarea {
   background-image: url(./assets/book.png);
   background-size: cover;
   background-repeat: no-repeat;
-  height: 90vh;
+  overflow: scroll;
+  height: 100vh;
+  padding-bottom: 80px;
 }
 
 .aboutContainer {
@@ -286,19 +284,20 @@ textarea {
   color: white;
   border: none;
   padding: 10px 20px;
-  margin: 0 5px;
+  font-size: 1.2em;
+  margin: 0 9px;
   text-decoration: none;
   cursor: pointer;
-  border-radius: 3px;
+  border-radius: 4px;
   transition: background-color 0.3s ease-in-out;
 }
 
 .nav-button:hover {
-  background-color: #777;
+  background-color: #848383;
 }
 
 .userButton {
-  margin-right: 20px;
+  margin-right: 10px;
 }
 
 .nav-left {
@@ -319,30 +318,18 @@ textarea {
   display: grid;
   grid-gap: 25px;
   padding: 0;
-  grid-template-columns: repeat(auto-fill, minmax(205px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
 }
 
-.bookContainer {
+.bookContainer,
+.bookShared {
   border: 1px solid #ddd;
   border-radius: 5px;
   padding: 10px;
   background-color: aliceblue;
   box-shadow: 0 4px 6px #0000001a;
   transition: box-shadow 0.6s ease-in-out;
-
-  /* Add a media query for smaller screens */
-  @media (max-width: 768px) {
-    /* Change the number of columns to adjust for smaller screens */
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  }
-}
-.profileBooks {
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 10px;
-  background-color: aliceblue;
-  box-shadow: 0 4px 6px #0000001a;
-  transition: box-shadow 0.6s ease-in-out;
+  line-height: 1.3em;
 
   /* Add a media query for smaller screens */
   @media (max-width: 768px) {
@@ -355,10 +342,10 @@ textarea {
 .genre-select {
   display: inline-block;
   padding: 10px 20px;
-  background-color: #83866d;
+  background-color: #555;
   color: #fff;
   text-decoration: none;
-  font-size: 20px;
+  font-size: 18px;
   border: none;
   border-radius: 10px;
   cursor: pointer;
@@ -368,12 +355,13 @@ textarea {
 
 .link-button:hover,
 .category-select:hover {
-  background-color: #0056b3;
+  background-color: #3f5439;
 }
 
 /* CSS for book details page */
 .bookDetails {
   display: flex;
+  padding-top: 40px;
 }
 
 .bookDetailCover {
@@ -382,17 +370,21 @@ textarea {
 
 .bookInfo {
   font-size: 1.1em;
-  margin-right: 150px;
+  max-width: 30%;
+  line-height: 1.3em;
 }
 
 .bookOwner a {
   text-decoration: none;
 }
+.hidden {
+  display: none;
+}
 
 .bookButtons button {
   margin: 10px 5px 10px 30px;
   padding: 10px 20px;
-  background-color: #9ab5d1;
+  background-color: #555;
   color: aliceblue;
   border: none;
   border-radius: 5px;
@@ -401,21 +393,39 @@ textarea {
 }
 
 .bookButtons button:hover {
-  background-color: #0056b3;
+  background-color: #3f5439;
 }
 
 .bookDetailCover img {
   margin: 15px;
 }
+.confirmation-text {
+  margin: 20px 20px;
+  border: 2px solid #777;
+  max-width: 400px;
+  background-color: #83866d;
+  color: aliceblue;
+  text-align: center;
+  font-size: 1.1em;
+  border-radius: 7px;
+}
 
 /* CSS for user profile */
+
 .profile-container {
   display: flex;
   justify-content: space-evenly;
+  /* padding-bottom: 70px; */
 }
+.book-details {
+  padding: 10px 20px 15px 30px;
+  display: grid;
+  flex-grow: 4;
+  /* flex-direction: column; */
+}
+
 .user-details {
   padding: 20px;
-  height: 100vh;
   background-color: #f6f2f2;
 }
 .profile-list {
@@ -424,14 +434,6 @@ textarea {
 }
 .profile-list li {
   margin: 40px 0 40px 0;
-}
-.book-details {
-  padding: 20px;
-  flex-grow: 4;
-}
-.profileBooks {
-  padding: 10px;
-  list-style: none;
 }
 
 .userName {
@@ -444,7 +446,7 @@ textarea {
 .edit-button,
 .challenge {
   padding: 5px 10px;
-  background-color: #83866d;
+  background-color: #555;
   color: #fff;
   text-decoration: none;
   font-size: 16px;
@@ -475,7 +477,8 @@ textarea {
   font-weight: bold;
   display: block;
 }
-.bookEditButton, .form-button {
+.bookEditButton,
+.form-button {
   background-color: #e7e7e7;
   border: 2px solid gray;
   color: rgb(13, 13, 13);
@@ -486,6 +489,7 @@ textarea {
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+  border-radius: 7px;
 }
 /* Add margin to create space between buttons */
 .bookEditButton + .bookEditButton {
@@ -497,10 +501,10 @@ textarea {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #001055;
+  background-color: #555;
   color: aliceblue;
   padding: 20px 20px;
-  position: fixed;
+  /* position: fixed; */
   bottom: 0;
   width: 100%;
   margin: 0;
@@ -508,17 +512,19 @@ textarea {
 
 .social-links {
   display: flex;
-  gap: 20px;
+  gap: 25px;
+  margin-right: 20px;
 }
 
 .social-links a {
   text-decoration: none;
   color: aliceblue;
-  font-size: 24px;
+  font-size: 27px;
 }
 
 .copyright {
   order: -1;
+  font-size: 1.1em;
 }
 
 .rounded-image {

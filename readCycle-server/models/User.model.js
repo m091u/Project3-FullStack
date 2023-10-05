@@ -48,7 +48,7 @@ const userSchema = new Schema({
       "Treptow-Köpenick",
     ],
   },
-  booksOfferedScore: Number,
+  booksOfferedScore: {type: Number,default:0},
   booksReceivedScore: Number,
 });
 

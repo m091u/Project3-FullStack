@@ -55,13 +55,7 @@ router.put("/profile/edit/:bookId", isAuthenticated, (req, res) => {
   Book.findByIdAndUpdate(
     bookId,
     {
-      title,
-      author,
-      genre,
-      description,
-      language,
-      coverImage,
-      review,
+      ...req.body
     },
     { new: true } // Return the updated book
   )

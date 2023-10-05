@@ -159,8 +159,9 @@ function AddBook(props) {
           value={review}
           onChange={(e) => setReview(e.target.value)}
         />
+        <br></br>
 
-        <button type="submit">Submit</button>
+        <button className="form-button" type="submit">Submit</button>
       </form>
     </div>
   );

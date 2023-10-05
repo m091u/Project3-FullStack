@@ -18,6 +18,9 @@ function AuthProviderWrapper(props) {
     localStorage.setItem("authToken", token);
   };
 
+  const getToken = () => {
+    return localStorage.getItem("authToken");
+  };
   const authenticateUser = () => {
     // Get the stored token from the localStorage
     const storedToken = localStorage.getItem("authToken");
@@ -77,6 +80,7 @@ function AuthProviderWrapper(props) {
         storeToken,
         authenticateUser,
         logOutUser,
+        getToken,
       }}
     >
       {props.children}

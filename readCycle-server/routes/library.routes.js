@@ -25,19 +25,26 @@ router.post("/library", (req, res) => {
     takenBy: null,
     isDelivered: false,
     booked: false,
+    booksOfferedScore:0
   })
     .then((book) => {
       // Add the newly created book to booksOffered
-      return User.findByIdAndUpdate(userId, {
-        $push: {
-          booksOffered: {
-            _id: book._id,
-            title: book.title,
-            author: book.author,
-            cover: book.coverImage,
+      return User.findByIdAndUpdate(
+        userId,
+        {
+          $push: {
+            booksOffered: {
+              _id: book._id,
+              title: book.title,
+              author: book.author,
+              cover: book.coverImage,
+            },
           },
+          // Increment the book count
+          $inc: { booksOfferedScore: 1 },
         },
-      });
+        { new: true } // Return the updated user document
+      );
     })
     .then(() => {
       res.status(201).json({ message: "Book created successfully" });
@@ -80,6 +87,5 @@ router.get("/library/:bookId", (req, res, next) => {
     })
     .catch((error) => res.json(error));
 });
-
 
 module.exports = router;

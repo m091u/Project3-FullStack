@@ -9,8 +9,7 @@ function BookCard ( { coverImage ,title, author, _id } ) {
         <img src={coverImage} width="190px" className="bookCover"/>
         <p><strong>{title}</strong></p>
       </Link>
-      <p>Author: {author}</p>
-      {/* <p style={{ maxWidth: "400px" }}>{description} </p> */}
+      <p><strong>Author:</strong> {author}</p>
     </div>
   );
 }

@@ -74,7 +74,9 @@ function ProfilePage() {
           <ul className="profile-list">
             <li>
               <p className="challenge">Reading challenge</p>
-              <p>Choose how many books you will read this year</p>
+              <button disabled>
+                Choose how many books you will read this year
+              </button>
             </li>
             <li>
               <Link to="/add-book" className="add-button">
@@ -93,47 +95,97 @@ function ProfilePage() {
       )}
 
       <div className="book-details">
-        <div className="booksOffered">
-          <p>
-            <strong>Books Offered</strong>
-          </p>
-          <p>Avaialble for sharing</p>
-          {user ? (
-            <ul className="booksShared">
-              {user.userOfferedBooks.map((book, index) => (
-                <li key={index} className="profileBooks">
-                  <img src={book.coverImage} alt="book cover" width="190" />
-                  <div>
-                    <strong>Title:</strong> {book.title}
-                    <br />
-                    <strong>Author:</strong> {book.author}
-                    <br />
-                    <Link to={`/edit/${book._id}`} className="bookEditButton">
-                      Edit
-                    </Link>
-                    <button
-                      onClick={() => handleDeleteBook(book._id)}
-                      className="bookEditButton"
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p>Loading...</p>
-          )}
-          <p>Requests Pending</p>
-        </div>
+        {/* <div> */}
+          <div>
+            <h2>
+              <strong>Books Offered</strong>
+            </h2>
+            <h3>
+            <strong> Avaialble for sharing</strong>
+            </h3>
+            <div >
+              {user ? (
+                <div className="booksShared">
+                  {user.userOfferedBooks
+                    .filter((book) => book.booked !== true)
+                    .map((book, index) => (
+                      <div className="bookShared">
+                      <div key={index} className="profileBook" >
+                        <img
+                          src={book.coverImage}
+                          alt="book cover"
+                          width="190"
+                          className="bookCover"
+                        />
+                        <strong>Title:</strong> {book.title}  <br></br>
+                        <strong>Author:</strong> {book.author} <br></br>
+                        <Link
+                          to={`/edit/${book._id}`}
+                          className="bookEditButton"
+                        >
+                          Edit
+                        </Link>
+                        <button
+                          onClick={() => handleDeleteBook(book._id)}
+                          className="bookEditButton"
+                        >
+                          Delete
+                        </button>
+                      </div> <br></br>
+                      </div>
+                    ))}
+                </div>
+              ) : (
+                <p>Loading...</p>
+              )}
+            </div>
+          </div>
+          <hr></hr>
+          <div>
+            <h3>
+              <strong>Pending Share Requests</strong>
+            </h3>
 
-        <div className="booksReceived">
-          <p>
-            <strong>Books Received</strong>
-          </p>
-          <p>Already received</p>
-          <p>Pending requests</p>
-        </div>
+            <div >
+              <div className="booksShared">
+                {user ? (
+                  user.userOfferedBooks
+                    .filter((book) => book.booked === true) // Filter books with booked property equal to true
+                    .map((book, index) => (
+                      <div className="bookShared">
+                      <div key={index} className="profileBook">
+                        <img
+                          src={book.coverImage}
+                          alt="book cover"
+                          width="180"
+                          className="bookCover"
+                        />
+                        <strong>Title:</strong> {book.title}
+                        <br />
+                        <strong>Author:</strong> {book.author}
+                        <br />
+                        {/* <Link
+                          to={`/edit/${book._id}`}
+                          className="bookEditButton"
+                        >
+                          Edit
+                        </Link> */}
+                        <button
+                          onClick={() => handleDeleteBook(book._id)}
+                          className="bookEditButton"
+                        >
+                          Delete
+                        </button>
+                        </div> <br></br>
+                      </div>
+                    ))
+                ) : (
+                  <p>Loading...</p>
+                )}
+              </div>
+            </div>
+          </div>
+        {/* </div> */}
       </div>
     </div>
   );
