@@ -35,7 +35,6 @@ function ProfilePage() {
           headers: { Authorization: `Bearer ${storedToken}` },
         })
         .then((response) => {
-          // console.log("Response:", response.data);
           const userData = response.data;
           setUser(userData);
 
@@ -162,7 +161,7 @@ function ProfilePage() {
             )}
           </div>
         </div>
-        <hr></hr>
+        {/* <hr></hr> */}
         <div>
           <h3>
             <strong>Pending Share Requests</strong>

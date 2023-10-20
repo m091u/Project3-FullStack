@@ -111,10 +111,6 @@ router.post("/email", isAuthenticated, (req, res) => {
   const { email, name } = requester;
   const userId = req.payload._id;
 
-  console.log(
-    "This is the id of user who would like to contact with owner",
-    userId
-  );
   sendVerificationEmail(
     { bookTitle, ownerName, contactEmail, email, name },
     res

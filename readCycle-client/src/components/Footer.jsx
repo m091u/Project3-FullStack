@@ -19,7 +19,7 @@ function Footer() {
           <i className="fab fa-instagram"></i>
         </a>
         <a
-          href="https://www.github.com"
+          href="https://github.com/m091u/Project3-FullStack"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -27,8 +27,7 @@ function Footer() {
         </a>
       </div>
       <div className="copyright">
-        &copy; {new Date().getFullYear()} readCycle. All Rights
-        Reserved.
+        &copy; {new Date().getFullYear()} readCycle. All Rights Reserved.
       </div>
     </footer>
   );
