@@ -11,7 +11,11 @@ function ProfilePage() {
   const [needsReloads, setNeedsReloads] = useState(true);
   const [booksOfferedScore, setBooksOfferedScore] = useState(0);
 
-  const API_URL = "http://localhost:4005";
+  // local
+  // const API_URL = "http://localhost:4005";
+  // deployment
+  const API_URL="https://mern-book-sharing-app.onrender.com"
+  
   const navigate = useNavigate();
 
   //gamify

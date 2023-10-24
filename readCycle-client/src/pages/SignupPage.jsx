@@ -4,7 +4,10 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const API_URL = "http://localhost:4005";
+// local
+  // const API_URL = "http://localhost:4005";
+  // deployment
+  const API_URL="https://mern-book-sharing-app.onrender.com"
 
 function SignupPage(props) {
   const [email, setEmail] = useState("");

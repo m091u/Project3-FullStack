@@ -2,7 +2,12 @@
 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-const API_URL = "http://localhost:4005";
+
+
+// when working on local version
+// const API_URL = "http://localhost:4005";
+// deployment
+const API_URL="https://mern-book-sharing-app.onrender.com"
 
 const AuthContext = React.createContext();
 
