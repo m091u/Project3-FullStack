@@ -36,6 +36,7 @@ body {
   padding: 15px;
   border-radius: 20px;
   font-size: 1.7em;
+  text-shadow: 2px 2px 3px #1f1e1e;
   line-height: 1.5;
   color: aliceblue;
 }
@@ -239,8 +240,9 @@ textarea {
 }
 
 .headerText {
-  color: #1f1e1f;
-  font-size: 1.6em;
+  color: aliceblue;
+  font-size: 1.7em;
+  text-shadow: 2px 2px 4px #000;
 }
 
 /* about page style */
