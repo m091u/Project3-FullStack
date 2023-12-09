@@ -23,6 +23,7 @@ module.exports = (app) => {
   app.use(
     cors({
       origin: [process.env.CLIENT_URL],
+      origin: 'https://readcycle.netlify.app',
     })
   );
 
