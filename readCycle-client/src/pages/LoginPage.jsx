@@ -8,7 +8,7 @@ import { AuthContext } from "../context/auth.context"; // <== IMPORT
 // when working on local version
 // const API_URL = "http://localhost:4005";
 // deployment
-const API_URL="https://mern-book-sharing-app.onrender.com"
+const API_URL = "https://mern-book-sharing-app.onrender.com";
 
 function LoginPage(props) {
   const [email, setEmail] = useState("");
@@ -50,7 +50,7 @@ function LoginPage(props) {
     <div className="LoginOuter">
       <div className="Login">
         <div className="LoginInner">
-        <h2>readCycle</h2>
+          <h2>readCycle</h2>
           <h3>Login</h3>
 
           <form onSubmit={handleLoginSubmit}>

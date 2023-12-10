@@ -12,15 +12,28 @@ const uri =
 
   // mongodb+srv://test_user:n0PgwB3ipaZWCYJh@cluster0.dmxynb3.mongodb.net/readCycle-server?retryWrites=true&w=majority
 
-  mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+  // mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
-mongoose
-  .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then((x) => {
-    console.log(
-      `Connected to Mongo! Database name: "${x.connections[0].name}"`
-    );
-  })
-  .catch((err) => {
-    console.error("Error connecting to mongo: ", err);
-  });
+// mongoose
+//   .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+//   .then((x) => {
+//     console.log(
+//       `Connected to Mongo! Database name: "${x.connections[0].name}"`
+//     );
+//   })
+//   .catch((err) => {
+//     console.error("Error connecting to mongo: ", err);
+//   });
+
+
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
+const dbConnection = mongoose.connection;
+
+dbConnection.once("open", () => {
+  console.log(`Connected to Mongo! Database name: "${dbConnection.name}"`);
+});
+
+dbConnection.on("error", (err) => {
+  console.error("Error connecting to MongoDB:", err);
+});

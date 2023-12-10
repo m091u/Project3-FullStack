@@ -22,9 +22,12 @@ module.exports = (app) => {
 
   app.use(
     cors({
-      origin:'*', 
-      credentials:true,            
-      optionSuccessStatus:200,
+      origin: "https://readcycle.netlify.app",
+      methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+      credentials: true,
+      // origin:'*',
+      // credentials:true,
+      // optionSuccessStatus:200,
       // origin: [process.env.CLIENT_URL],
       // origin: 'https://readcycle.netlify.app',
     })
@@ -33,8 +36,8 @@ module.exports = (app) => {
   // In development environment the app logs
   app.use(logger("dev"));
 
-   // AHandles access to the public folder
-   app.use(express.static(path.join(__dirname, "..", "public")));
+  // AHandles access to the public folder
+  app.use(express.static(path.join(__dirname, "..", "public")));
 
   // To have access to `body` property in the request
   app.use(express.json());
