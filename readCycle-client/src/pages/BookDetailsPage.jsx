@@ -97,6 +97,7 @@ function BookDetailsPage(props) {
 
   return (
     <>
+    <div>
       <div className="bookDetails">
         {book && (
           <>
@@ -147,6 +148,7 @@ function BookDetailsPage(props) {
         </Link>
       </div>
       {success}
+      </div>
     </>
   );
 }

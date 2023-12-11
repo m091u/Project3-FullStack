@@ -380,8 +380,8 @@ textarea {
 }
 
 .bookInfo {
-  font-size: 1.1em;
-  max-width: 30%;
+  font-size: 1rem;
+  max-width: 50%;
   line-height: 1.3em;
 }
 
@@ -411,13 +411,13 @@ textarea {
   margin: 15px;
 }
 .confirmation-text {
-  margin: 20px 20px;
+  margin: 15px 15px;
   border: 2px solid #777;
   max-width: 400px;
   background-color: #555;
   color: aliceblue;
   text-align: center;
-  font-size: 1.1em;
+  font-size: 1rem;
   border-radius: 7px;
 }
 
