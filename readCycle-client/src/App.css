@@ -370,6 +370,10 @@ textarea {
 }
 
 /* CSS for book details page */
+.details-page{
+  min-height: 100vh;
+}
+
 .bookDetails {
   display: flex;
   padding-top: 40px;
@@ -379,15 +383,16 @@ textarea {
   margin-right: 20px;
 }
 
-.bookInfo {
+.book-info {
   font-size: 1rem;
-  max-width: 50%;
+  max-width: 60%;
   line-height: 1.3em;
 }
 
 .bookOwner a {
   text-decoration: none;
 }
+
 .hidden {
   display: none;
 }
@@ -410,6 +415,7 @@ textarea {
 .bookDetailCover img {
   margin: 15px;
 }
+
 .confirmation-text {
   margin: 15px 15px;
   border: 2px solid #777;
@@ -422,7 +428,6 @@ textarea {
 }
 
 /* CSS for user profile */
-
 .profile-container {
   display: flex;
   justify-content: space-evenly;

@@ -97,7 +97,7 @@ function BookDetailsPage(props) {
 
   return (
     <>
-      <div>
+      <div className="details-page">
         <div className="bookDetails">
           {book && (
             <>
@@ -108,7 +108,7 @@ function BookDetailsPage(props) {
                   className="rounded-image"
                 />
               </div>
-              <div className="bookInfo">
+              <div className="book-info">
                 <h2>{book.title}</h2>
                 <p>
                   by <strong>{book.author}</strong>
