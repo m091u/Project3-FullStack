@@ -23,6 +23,7 @@ function Navbar() {
           </Link>
         )}
       </div>
+      
       <div className="nav-right">
         {isLoggedIn && (
           <>

@@ -69,10 +69,11 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  min-height: 95vh;
+  min-height: 100vh;
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
-  max-width: 100%;
   padding: 0;
 }
 
@@ -87,12 +88,9 @@ body {
   color: rgb(92, 106, 106);
 }
 
+.SignupInner,
 .LoginInner {
-  margin: 50px 0 0 50px;
-}
-
-.SignupInner {
-  margin: 30px 0 0 50px;
+  text-align: center;
 }
 
 input {
@@ -220,8 +218,9 @@ textarea {
 }
 
 .bookDetails {
-  display: inline-block;
-  margin: 20px;
+  display: flex;
+  padding-top: 80px;
+  margin: 40px;
 }
 
 .libraryPage {
@@ -249,10 +248,14 @@ textarea {
 .about {
   background-image: url(./assets/book.png);
   background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
   overflow: scroll;
   height: 100vh;
   padding-bottom: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .aboutContainer {
@@ -271,7 +274,7 @@ textarea {
   flex-direction: column;
   margin: auto;
   text-align: center;
-  font-size: 1.1em;
+  font-size: 1.2em;
   line-height: 1.5;
   color: aliceblue;
 }
@@ -283,6 +286,9 @@ textarea {
   align-items: center;
   background-color: #c5c0c0;
   padding: 15px 20px;
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 
 .nav-button-container {
@@ -341,12 +347,6 @@ textarea {
   box-shadow: 0 4px 6px #0000001a;
   transition: box-shadow 0.6s ease-in-out;
   line-height: 1.3em;
-
-  /* Add a media query for smaller screens */
-  @media (max-width: 768px) {
-    /* Change the number of columns to adjust for smaller screens */
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  }
 }
 
 .link-button,
@@ -361,7 +361,7 @@ textarea {
   border-radius: 10px;
   cursor: pointer;
   margin: 10px 10px 30px;
-  min-width: 200px;
+  max-width: 250px;
 }
 
 .link-button:hover,
@@ -370,14 +370,10 @@ textarea {
 }
 
 /* CSS for book details page */
-.details-page{
+.details-page {
   min-height: 100vh;
 }
 
-.bookDetails {
-  display: flex;
-  padding-top: 40px;
-}
 
 .bookDetailCover {
   margin-right: 20px;
@@ -556,4 +552,122 @@ textarea {
 
 .rounded-image {
   border-radius: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .booksContainer,
+  .booksShared {
+    grid-gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(105px, 1fr));
+  }
+
+  .bookContainer,
+  .bookShared {
+    line-height: 1rem;
+  }
+
+  .BookCard a,
+  .BookCard p {
+    font-size: 0.8rem;
+  }
+  .homePage {
+    max-height: 100vh;
+  }
+  .nav {
+    padding: 15px 5px;
+  }
+
+  .nav-left,
+  .nav-right {
+    display: flex;
+  }
+  .nav-button {
+    font-size: 0.7rem;
+    padding: 5px 7px;
+    margin: 0 4px;
+  }
+  .homeContent {
+    max-width: 300px;
+    font-size: 1rem;
+  }
+  .headerText {
+    font-size: 1.2rem;
+  }
+  .libraryHeader {
+    padding-top: 50px;
+  }
+  .libraryPage {
+    margin: 20px 20px 80px;
+  }
+  .link-button,
+  .genre-select {
+    font-size: 0.8rem;
+    max-width: 170px;
+    margin: 0 5px 15px;
+    display: inline;
+    padding: 6px;
+  }
+
+  .footer {
+    height: 50px;
+  }
+  .copyright {
+    font-size: 0.7rem;
+  }
+  .social-links {
+    gap: 15px;
+    margin-right: 10px;
+  }
+  .footer .fab {
+    font-size: 1.2rem;
+  }
+
+  .aboutContainer {
+    margin-top: 4rem;
+  }
+  .aboutBox {
+    font-size: 0.8rem;
+    line-height: 0.9rem;
+    width: 70%;
+  }
+  .Login,
+  .Signup {
+    width: 70%;
+    min-height: 430px;
+  }
+
+  input {
+    font-size: 0.8rem;
+  }
+
+  .bookDetails {
+    display: flex;
+    padding-top: 40px;
+    margin: 25px 15px;
+  }
+
+  .bookDetailCover img {
+    width: 130px;
+  }
+  .book-info{
+    font-size: .8rem;
+    line-height: 1rem;
+  }
+
+  .confirmation-text{
+    margin: 15px auto;
+    max-width: 80%;
+    font-size: .8rem;
+  }
+  .bookButtons{
+    max-width: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: space-around;
+  }
+  .bookButtons button{
+    margin: 0;
+    font-size: .8rem;
+    padding: 5px 10px;
+  }
 }
