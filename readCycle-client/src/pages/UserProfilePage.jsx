@@ -11,11 +11,7 @@ function ProfilePage() {
   const [needsReloads, setNeedsReloads] = useState(true);
   const [booksOfferedScore, setBooksOfferedScore] = useState(0);
 
-  // local
-  // const API_URL = "http://localhost:4005";
-  // deployment
-  const API_URL="https://mern-book-sharing-app.onrender.com"
-  
+  const API_URL = "http://localhost:4005";
   const navigate = useNavigate();
 
   //gamify
@@ -143,6 +139,7 @@ function ProfilePage() {
                         <br></br>
                         <strong>Title:</strong> {book.title} <br></br>
                         <strong>Author:</strong> {book.author} <br></br>
+                        <div className="book-buttons">
                         <Link
                           to={`/edit/${book._id}`}
                           className="bookEditButton"
@@ -155,6 +152,7 @@ function ProfilePage() {
                         >
                           Delete
                         </button>
+                        </div>
                       </div>{" "}
                       <br></br>
                     </div>
@@ -190,12 +188,6 @@ function ProfilePage() {
                         <br />
                         <strong>Author:</strong> {book.author}
                         <br />
-                        {/* <Link
-                          to={`/edit/${book._id}`}
-                          className="bookEditButton"
-                        >
-                          Edit
-                        </Link> */}
                         <button
                           onClick={() => handleDeleteBook(book._id)}
                           className="bookEditButton"

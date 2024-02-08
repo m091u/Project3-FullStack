@@ -174,11 +174,11 @@ textarea {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  padding-left: 20px;
   min-height: 100vh;
-  padding-top: 20px;
+  padding-top: 100px;
   padding-bottom: 90px;
   overflow: scroll;
+  text-align: center;
 }
 
 .form-group {
@@ -374,7 +374,6 @@ textarea {
   min-height: 100vh;
 }
 
-
 .bookDetailCover {
   margin-right: 20px;
 }
@@ -427,7 +426,7 @@ textarea {
 .profile-container {
   display: flex;
   justify-content: space-evenly;
-  padding-bottom: 70px;
+  padding: 70px 0;
 }
 .book-details {
   padding: 10px 20px 15px 30px;
@@ -453,7 +452,6 @@ textarea {
 }
 .userAvatar {
   border-radius: 10px;
-  /* padding-left: 10px; */
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -514,7 +512,7 @@ textarea {
   font-size: 16px;
   border-radius: 7px;
 }
-/* Add margin to create space between buttons */
+
 .bookEditButton + .bookEditButton {
   margin-left: 10px;
 }
@@ -530,7 +528,6 @@ textarea {
   position: fixed;
   width: 100%;
   bottom: 0;
-  /* height: 60px; */
 }
 
 .social-links {
@@ -558,14 +555,12 @@ textarea {
   .booksContainer,
   .booksShared {
     grid-gap: 1rem;
-    grid-template-columns: repeat(auto-fill, minmax(105px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(115px, 1fr));
   }
-
   .bookContainer,
   .bookShared {
     line-height: 1rem;
   }
-
   .BookCard a,
   .BookCard p {
     font-size: 0.8rem;
@@ -576,7 +571,6 @@ textarea {
   .nav {
     padding: 15px 5px;
   }
-
   .nav-left,
   .nav-right {
     display: flex;
@@ -607,7 +601,6 @@ textarea {
     display: inline;
     padding: 6px;
   }
-
   .footer {
     height: 50px;
   }
@@ -621,7 +614,6 @@ textarea {
   .footer .fab {
     font-size: 1.2rem;
   }
-
   .aboutContainer {
     margin-top: 4rem;
   }
@@ -635,39 +627,94 @@ textarea {
     width: 70%;
     min-height: 430px;
   }
-
-  input {
+  input,
+  #genre,
+  textarea {
     font-size: 0.8rem;
+    margin: 5px 0;
+    font-size: inherit;
   }
-
   .bookDetails {
     display: flex;
     padding-top: 40px;
     margin: 25px 15px;
   }
-
   .bookDetailCover img {
     width: 130px;
   }
-  .book-info{
-    font-size: .8rem;
+  .book-info {
+    font-size: 0.8rem;
     line-height: 1rem;
   }
-
-  .confirmation-text{
+  .confirmation-text {
     margin: 15px auto;
     max-width: 80%;
-    font-size: .8rem;
+    font-size: 0.8rem;
   }
-  .bookButtons{
+  .bookButtons {
     max-width: 80%;
     margin: auto;
     display: flex;
     justify-content: space-around;
   }
-  .bookButtons button{
+  .bookButtons button {
     margin: 0;
-    font-size: .8rem;
+    font-size: 0.8rem;
     padding: 5px 10px;
+  }
+  .AddBookPage,
+  .bookEditPage,
+  .profileEdit {
+    padding-top: 60px;
+  }
+  .form-group input[type="text"],
+  .form-group input[type="email"],
+  .form-group input[type="file"],
+  .form-group textarea,
+  .form-group select,
+  #location,
+  #genreEdit {
+    width: 80%;
+  }
+  .profile-container {
+    padding: 50px 0;
+  }
+  .book-details {
+    padding: 0 20px 20px 20px;
+    text-align: center;
+  }
+  .profile-container {
+    flex-direction: column;
+  }
+  .bookEditButton {
+    display: inline;
+  }
+  .bookEditButton + .bookEditButton {
+    margin-left: 4px;
+  }
+  .bookEditButton button {
+    padding: 4px 10px;
+  }
+  .book-buttons {
+    margin: auto;
+  }
+  .userAvatar {
+    width: 80px;
+  }
+  .user-avatar {
+    padding: 0;
+  }
+  .user-details {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 15px;
+  }
+  .profile-list li,
+  .profile-list {
+    margin-top: 0;
+  }
+  .profile-list li {
+    margin: 10px 0;
   }
 }
