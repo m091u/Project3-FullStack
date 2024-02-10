@@ -10,6 +10,7 @@ const userSchema = new Schema({
   email: {
     type: String,
     lowercase: true,
+    index: true,
     required: [true, "❕ Email can't be blank"],
     match: [/\S+@\S+\.\S+/, "is invalid"],
   },

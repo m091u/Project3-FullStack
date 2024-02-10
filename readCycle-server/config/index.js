@@ -17,12 +17,16 @@ const cors = require("cors"); // <== IMPORT
 // Middleware configuration
 module.exports = (app) => {
   // Because this is a server that will accept requests from outside and it will be hosted ona server with a `proxy`, express needs to know that it should trust that setting.
-  // Services like heroku use something called a proxy and you need to add this to your server
   app.set("trust proxy", 1);
 
   app.use(
     cors({
-      origin: [process.env.CLIENT_URL],
+      origin: "https://readcycle.netlify.app",
+      methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+      credentials: true,
+      optionsSuccessStatus: 204,
+      // origin:'*',
+      // origin: [process.env.CLIENT_URL],
     })
   );
 
@@ -37,6 +41,7 @@ module.exports = (app) => {
   // In development environment the app logs
   app.use(logger("dev"));
 
+
   // Handles access to the public folder
   app.use(express.static(path.join(__dirname, "..", "public")));
 
@@ -44,4 +49,8 @@ module.exports = (app) => {
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
   app.use(cookieParser());
+
+  app.options('*', cors()); 
+
 };
+

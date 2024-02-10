@@ -5,11 +5,10 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/auth.context"; // <== IMPORT
 
-const API_URL =
-  // when working on local version
-  "http://localhost:4005";
-// when working on deployment version
-// link of backend deployment server?
+// when working on local version
+// const API_URL = "http://localhost:4005";
+// deployment
+const API_URL = "https://mern-book-sharing-app.onrender.com";
 
 function LoginPage(props) {
   const [email, setEmail] = useState("");
@@ -51,7 +50,7 @@ function LoginPage(props) {
     <div className="LoginOuter">
       <div className="Login">
         <div className="LoginInner">
-        <h2>readCycle</h2>
+          <h2>readCycle</h2>
           <h3>Login</h3>
 
           <form onSubmit={handleLoginSubmit}>

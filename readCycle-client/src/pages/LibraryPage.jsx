@@ -7,7 +7,10 @@ import { AuthContext } from "../context/auth.context";
 
 import BookCard from "../components/BookCard";
 
-const API_URL = "http://localhost:4005";
+// when working on local version
+// const API_URL = "http://localhost:4005";
+// deployment
+const API_URL="https://mern-book-sharing-app.onrender.com"
 
 function LibraryPage() {
   const [books, setBooks] = useState([]);

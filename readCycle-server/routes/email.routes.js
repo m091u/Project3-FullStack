@@ -21,9 +21,9 @@ const sendVerificationEmail = (
   res
 ) => {
   // When working on local version
-  const baseUrl = "http://localhost:4005";
+  // const baseUrl = "http://localhost:4005";
   // When working on deployment version
-  // ??
+  const baseURL = "https://mern-book-sharing-app.onrender.com"
 
   // mail options !! no need token !
   const mailOptions = {

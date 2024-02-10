@@ -3,7 +3,11 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
-const API_URL = "http://localhost:4005";
+
+// when working on local version
+// const API_URL = "http://localhost:4005";
+// deployment
+const API_URL = "https://mern-book-sharing-app.onrender.com";
 
 function BookDetailsPage(props) {
   const navigate = useNavigate();
@@ -59,7 +63,7 @@ function BookDetailsPage(props) {
             }
           )
           .then((updateResponse) => {
-            console.log("Update Response:", updateResponse); 
+            console.log("Update Response:", updateResponse);
             // Update the 'book' state with the updated book data
             setBook({ ...book, booked: true });
           })
@@ -93,56 +97,60 @@ function BookDetailsPage(props) {
 
   return (
     <>
-      <div className="bookDetails">
-        {book && (
-          <>
-            <div className="bookDetailCover">
-              <img
-                src={book.coverImage}
-                width="220px"
-                className="rounded-image"
-              />
-            </div>
-            <div className="bookInfo">
-              <h2>{book.title}</h2>
-              <p>
-                by <strong>{book.author}</strong>
-              </p>
-              <p>
-                <strong>Genre: </strong>
-                {book.genre}
-              </p>
-              <p>
-                <strong>Description: </strong> {book.description}
-              </p>
-              <p>
-                <strong>Language: </strong> {book.language}
-              </p>
-              <p>
-                <strong>Owner review: </strong> {book.review}
-              </p>
-              <p className="bookOwner">
-                <strong>Book Owner: {book.offeredBy.name} </strong>
-              </p>
-              <p>
-                <strong className="hidden">
-                  Contact e-mail: {book.offeredBy.email}{" "}
-                </strong>
-              </p>
-            </div>
-          </>
-        )}
-      </div>
-      <div className="bookButtons">
-        <Link to="">
-          <button onClick={() => handleEmailSent()}>Contact Book Owner</button>
-        </Link>
+      <div className="details-page">
+        <div className="bookDetails">
+          {book && (
+            <>
+              <div className="bookDetailCover">
+                <img
+                  src={book.coverImage}
+                  width="220px"
+                  className="rounded-image"
+                />
+              </div>
+              <div className="book-info">
+                <h2>{book.title}</h2>
+                <p>
+                  by <strong>{book.author}</strong>
+                </p>
+                <p>
+                  <strong>Genre: </strong>
+                  {book.genre}
+                </p>
+                <p>
+                  <strong>Description: </strong> {book.description}
+                </p>
+                <p>
+                  <strong>Language: </strong> {book.language}
+                </p>
+                <p>
+                  <strong>Owner review: </strong> {book.review}
+                </p>
+                <p className="bookOwner">
+                  <strong>Book Owner: {book.offeredBy.name} </strong>
+                </p>
+                <p>
+                  <strong className="hidden">
+                    Contact e-mail: {book.offeredBy.email}{" "}
+                  </strong>
+                </p>
+              </div>
+            </>
+          )}
+        </div>
+        <div className="bookButtons">
+          <Link to="">
+            <button onClick={() => handleEmailSent()}>
+              Contact Book Owner
+            </button>
+          </Link>
 
-        <Link to="/library">
-          <button>Back to Library</button>
-        </Link>
+          <Link to="/library">
+            <button>Back to Library</button>
+          </Link>
+        </div>
+        {success}
       </div>
-      {success}
     </>
   );
 }

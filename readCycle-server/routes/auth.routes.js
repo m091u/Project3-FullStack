@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User.model");
 
-const {isAuthenticated} = require("../middleware/jwt.middleware"); // <== IMPORT
+const { isAuthenticated } = require("../middleware/jwt.middleware"); // <== IMPORT
 const saltRounds = 10;
 
 // POST /auth/signup  - Creates a new user in the database
@@ -37,6 +37,7 @@ router.post("/signup", (req, res, next) => {
   // Check the users collection if a user with the same email already exists
   User.findOne({ email })
     .then((foundUser) => {
+      console.log(`Found User Query: ${foundUser}`);
       // If the user with the same email already exists, send an error response
       if (foundUser) {
         res.status(400).json({ message: "User already exists." });
@@ -63,7 +64,7 @@ router.post("/signup", (req, res, next) => {
       res.status(201).json({ user: user });
     })
     .catch((err) => {
-      console.log(err);
+      console.error("Error finding user:", err);
       res.status(500).json({ message: "Internal Server Error" });
     });
 });
