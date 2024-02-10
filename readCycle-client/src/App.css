@@ -242,6 +242,7 @@ textarea {
   color: aliceblue;
   font-size: 1.7em;
   text-shadow: 2px 2px 4px #000;
+  padding-top: 10px;
 }
 
 /* about page style */
@@ -361,7 +362,7 @@ textarea {
   border-radius: 10px;
   cursor: pointer;
   margin: 10px 10px 30px;
-  max-width: 250px;
+  max-width: 260px;
 }
 
 .link-button:hover,
@@ -427,6 +428,7 @@ textarea {
   display: flex;
   justify-content: space-evenly;
   padding: 70px 0;
+  min-height: 100vh;
 }
 .book-details {
   padding: 10px 20px 15px 30px;
@@ -549,6 +551,9 @@ textarea {
 
 .rounded-image {
   border-radius: 10px;
+}
+.book-buttons {
+  margin: auto;
 }
 
 @media screen and (max-width: 768px) {
@@ -682,6 +687,7 @@ textarea {
   .book-details {
     padding: 0 20px 20px 20px;
     text-align: center;
+    margin-bottom: 20px;
   }
   .profile-container {
     flex-direction: column;
@@ -707,6 +713,7 @@ textarea {
   .user-details {
     display: flex;
     align-items: center;
+    justify-content: space-evenly;
     gap: 1rem;
     padding: 15px;
   }

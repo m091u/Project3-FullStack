@@ -11,7 +11,9 @@ function ProfilePage() {
   const [needsReloads, setNeedsReloads] = useState(true);
   const [booksOfferedScore, setBooksOfferedScore] = useState(0);
 
-  const API_URL = "http://localhost:4005";
+  // const API_URL = "http://localhost:4005";
+  // deployment
+  const API_URL = "https://mern-book-sharing-app.onrender.com";
   const navigate = useNavigate();
 
   //gamify
@@ -140,18 +142,18 @@ function ProfilePage() {
                         <strong>Title:</strong> {book.title} <br></br>
                         <strong>Author:</strong> {book.author} <br></br>
                         <div className="book-buttons">
-                        <Link
-                          to={`/edit/${book._id}`}
-                          className="bookEditButton"
-                        >
-                          Edit
-                        </Link>
-                        <button
-                          onClick={() => handleDeleteBook(book._id)}
-                          className="bookEditButton"
-                        >
-                          Delete
-                        </button>
+                          <Link
+                            to={`/edit/${book._id}`}
+                            className="bookEditButton"
+                          >
+                            Edit
+                          </Link>
+                          <button
+                            onClick={() => handleDeleteBook(book._id)}
+                            className="bookEditButton"
+                          >
+                            Delete
+                          </button>
                         </div>
                       </div>{" "}
                       <br></br>
@@ -169,42 +171,42 @@ function ProfilePage() {
             <strong>Pending Share Requests</strong>
           </h3>
 
-          <div>
+          {user &&
+          user.userOfferedBooks &&
+          user.userOfferedBooks.filter((book) => book.booked === true).length >
+            0 ? (
             <div className="booksShared">
-              {user ? (
-                user.userOfferedBooks
-                  .filter((book) => book.booked === true) // Filter books with booked property equal to true
-                  .map((book, index) => (
-                    <div className="bookShared">
-                      <div key={index} className="profileBook">
-                        <img
-                          src={book.coverImage}
-                          alt="book cover"
-                          width="180"
-                          className="bookCover"
-                        />{" "}
-                        <br></br>
-                        <strong>Title:</strong> {book.title}
-                        <br />
-                        <strong>Author:</strong> {book.author}
-                        <br />
-                        <button
-                          onClick={() => handleDeleteBook(book._id)}
-                          className="bookEditButton"
-                        >
-                          Delete
-                        </button>
-                      </div>{" "}
-                      <br></br>
+              {user.userOfferedBooks
+                .filter((book) => book.booked === true)
+                .map((book, index) => (
+                  <div className="bookShared" key={index}>
+                    <div className="profileBook">
+                      <img
+                        src={book.coverImage}
+                        alt="book cover"
+                        width="180"
+                        className="bookCover"
+                      />
+                      <br />
+                      <strong>Title:</strong> {book.title}
+                      <br />
+                      <strong>Author:</strong> {book.author}
+                      <br />
+                      <button
+                        onClick={() => handleDeleteBook(book._id)}
+                        className="bookEditButton"
+                      >
+                        Delete
+                      </button>
                     </div>
-                  ))
-              ) : (
-                <p>Loading...</p>
-              )}
+                    <br />
+                  </div>
+                ))}
             </div>
-          </div>
+          ) : (
+            <p style={{ margin: "5px" }}>No request yet</p>
+          )}
         </div>
-        {/* </div> */}
       </div>
     </div>
   );
